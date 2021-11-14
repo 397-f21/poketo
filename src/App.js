@@ -1,10 +1,10 @@
 import './App.css';
-import AddTaskButton from './components/addTaskButton';
+import AddTaskButton from './components/AddTaskButton';
 
 function App() {
   return (
       <div className='layout'>
-          <AddTaskButton/>
+          <AddTaskButton />
       </div>
   );
 }
