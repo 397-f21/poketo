@@ -1,4 +1,7 @@
-.add-task-button{
+import styled from "styled-components";
+
+
+export const addTaskButton = styled.div`
     width: 105px;
     height: 105px;
     background: #FFFFFF;
@@ -6,5 +9,4 @@
     border-radius: 40px 40px 40px 40px;
     border: 1px solid black;
     /* border-color: red; Testing */
-}
-
+`
