@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import '../styles/AddTaskButton.css'
+import { writeData, useUserState } from '../utilities/firebase';
 
 const customStyles = {
     overlay:{
@@ -13,13 +14,19 @@ const customStyles = {
 const AddTaskButton = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [taskText, setTaskText] = useState("");
+    const [user] = useUserState();
 
     const handleChange = (event) => {
         setTaskText(event.target.value);
     };
+    
+    const getDatePath = () => {
+        return 1;
+    }
 
     const handleSubmit = (event) => {
         console.log(taskText);
+        writeData(taskText, `${"dummy"}/${getDatePath()}`);
     };
 
     ReactModal.setAppElement('#root');
