@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
-import '../styles/AddTaskButton.css'
 import { writeData, useUserState } from '../utilities/firebase';
 import { pokemonList } from '../utilities/pokemon.js';
+import Task from './Task';
+import '../styles/AddTaskButton.css'
 
 const customStyles = {
     overlay:{
@@ -56,10 +57,8 @@ const AddTaskButton = () => {
     }
 
     return(
-        <div >
-            <button className='add-task-button' onClick={openModal}>
-                <h1>Add Task</h1>
-                </button>
+        <Task onClick={openModal} >
+            <h1>Add Task!</h1>
             <ReactModal isOpen={modalVisible} onRequestClose={closeModal} className="modal-styling" style={customStyles}>
                 <div onClick={closeModal}>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +72,7 @@ const AddTaskButton = () => {
                 <input type="text" value={taskText} onChange={handleChange}/>
                 <br /><button type="submit" onClick={handleSubmit}> Ok </button>
             </ReactModal>
-        </div>
+        </Task>
     )
 }
 
