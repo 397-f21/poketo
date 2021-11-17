@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { writeData } from "../utilities/firebase";
 import { useState } from "react";
+import {todayKey} from '../utilities/time';
 
 const TaskCard = styled.div`
     display: grid;
@@ -16,7 +17,7 @@ const TaskCard = styled.div`
     grid-template-areas: 
         'poke-img nm-lv'
         'poke-img habit'
-        'poke-img exper';
+        'poke-img exp';
     &:hover{
         cursor: pointer;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
@@ -41,23 +42,21 @@ const PokeImg = styled.div`
     }
 `
 
-const Task = ({task, taskData}) => {
+const Task = ({task: taskName, taskData}) => {
 
-    const today = new Date();
-    const todayString = `${today.getDay()}/${today.getMonth()}/${today.getDate()}/${today.getYear()}`;
-    const [completed, setCompleted] = useState(taskData.date.includes(todayString));
+    const [completed, setCompleted] = useState(taskData.date.includes(todayKey));
 
     const markAsComplete = () => {
-        if (!taskData.date.includes(todayString)) {
-            writeData(taskData.level + 1, `${"dummy"}/${task}/level`);
-            taskData.date.push(todayString)
-            writeData(taskData.date, `${"dummy"}/${task}/date`);
+        if (!taskData.date.includes(todayKey)) {
+            writeData(taskData.level + 1, `${"dummy"}/${taskName}/level`);
+            taskData.date.push(todayKey)
+            writeData(taskData.date, `${"dummy"}/${taskName}/date`);
             setCompleted(true);
         }
         else {
-            writeData(taskData.level - 1, `${"dummy"}/${task}/level`);
+            writeData(taskData.level - 1, `${"dummy"}/${taskName}/level`);
             taskData.date.pop();
-            writeData(taskData.date, `${"dummy"}/${task}/date`);
+            writeData(taskData.date, `${"dummy"}/${taskName}/date`);
             setCompleted(false);
         }
         
@@ -70,7 +69,7 @@ const Task = ({task, taskData}) => {
                 <img src={`https://www.serebii.net/swordshield/pokemon/${taskData.number}.png`}></img>
             </PokeImg>
             <p>{taskData.pokemon}</p>
-            <p>{task}</p>
+            <p>{taskName}</p>
             <p>Lv. {taskData.level}</p>
         </TaskCard> : 
         <TaskCard>
@@ -78,7 +77,7 @@ const Task = ({task, taskData}) => {
                 <img src={`https://www.serebii.net/swordshield/pokemon/${taskData.number}.png`}></img>
             </PokeImg>
             <p>{taskData.pokemon}</p>
-            <p>{task}</p>
+            <p>{taskName}</p>
             <p>Lv. {taskData.level}</p>
         </TaskCard>
     )

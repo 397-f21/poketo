@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import { writeData, useUserState } from '../utilities/firebase';
 import { pokemonList } from '../utilities/pokemon.js';
-import Task from './Task';
 import styled from 'styled-components';
 import '../styles/AddTaskButton.css'
+import {todayKey} from '../utilities/time';
 
 const ModalStyles = {
     overlay:{
@@ -143,45 +143,35 @@ const SubmitBtn = styled.button`
     }
 `
 
-
-
 const AddTaskButton = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [taskText, setTaskText] = useState("");
-    const [selectedPokemon, setSelectedPokemon] = useState("");
-    const [pokemonObj, setPokemonObj] = useState({});
+    const [selectedPokeObj, setSelectedPokeObj] = useState({}); // UNUSED
     const [user] = useUserState();
 
     const handleChange = (event) => {
         setTaskText(event.target.value);
     };
 
-    const selectPokemon = (pokemon, obj) => {
-        pokemon === selectedPokemon ? setSelectedPokemon("") : setSelectedPokemon(pokemon);
-        setPokemonObj(obj);
+    const selectPokemon = (pokeObj) => {
+        pokeObj.name === selectedPokeObj.name ? setSelectedPokeObj({}) : setSelectedPokeObj(pokeObj);
     }
 
     const generatePokemon = () => {
-        return pokemonList.map((item, index) => {
+        return pokemonList.map((pokemon, index) => {
             return(
-                selectedPokemon === item.name?
-                // refactor selectPokemon args
-                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(item.name, item)} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} style={{ border: '4px solid #31C3FF'}}/>:
-                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(item.name, item)} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
+                selectedPokeObj.name === pokemon.name?
+                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.number}.png`} style={{ border: '4px solid #31C3FF'}}/>:
+                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.number}.png`} />
             )
         })
     }
-    
-    const getDatePath = () => {
-        return 1;
-    }
 
     const handleSubmit = (event) => {
-        const today = new Date();
         const dbEntry = {
-            'pokemon': selectedPokemon,
-            'number': pokemonObj.number,
-            'date': [``],//${today.getDay()}/${today.getMonth()}/${today.getDate()}/${today.getYear()}`],
+            'pokemon': selectedPokeObj.name,
+            'number': selectedPokeObj.number,
+            'date': [''],
             'level': 1
         }
         writeData(dbEntry, `${"dummy"}/${taskText}`);
