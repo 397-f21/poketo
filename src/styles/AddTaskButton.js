@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const addTaskButton = styled.div`
+export const AddTaskButton = styled.div`
     width: 105px;
     height: 105px;
     background: #FFFFFF;

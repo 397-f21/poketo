@@ -1,6 +1,17 @@
-import React from 'react'
 import { useData, useUserState } from '../utilities/firebase.js';
+import TaskCard from './Task'
+import AddTaskButton from './AddTaskButton.js';
+import styled from 'styled-components';
 import '../styles/TaskList.css'
+
+const TasksWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+`
 
 const TaskList = () => {
     const [user] = useUserState();
@@ -8,12 +19,10 @@ const TaskList = () => {
     console.log(tasks);
 
     return (
-        <div>
-            <button className='task-box'>
-                <h1>{tasks}</h1>
-                
-                </button>
-        </div>
+        <TasksWrapper id='task-wrapper'>
+            <TaskCard task={tasks}/>
+            <AddTaskButton/>
+        </TasksWrapper>
     )
 }
 
