@@ -1,5 +1,5 @@
 import { useData, useUserState } from '../utilities/firebase.js';
-import TaskCard from './Task'
+import Task from './Task'
 import AddTaskButton from './AddTaskButton.js';
 import styled from 'styled-components';
 import '../styles/TaskList.css'
@@ -21,7 +21,7 @@ const TaskList = () => {
     const generateTaskList = () => {
 
         return Object.keys(tasks).map((task) => {
-            return <TaskCard task={tasks[task]}></TaskCard>
+            return <Task task={task} taskData={tasks[task]}></Task>
         })
     }
 

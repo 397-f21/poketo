@@ -31,10 +31,13 @@ const PokeImg = styled.div`
     justify-self: center;
 `
 
-const Task = ({task}) => {
+const Task = ({task, taskData}) => {
     return(
         <TaskCard>
             <PokeImg/>
+            <p>{taskData.pokemon}</p>
+            <p>{task}</p>
+            <p>{taskData.level}</p>
             {/* <h1>{task}</h1> */}
         </TaskCard>
     )
