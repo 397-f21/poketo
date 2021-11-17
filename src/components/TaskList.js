@@ -26,7 +26,7 @@ const TaskList = () => {
 
     return (
         <TasksWrapper id='task-wrapper'>
-            {loading||error? null : generateTaskList()}
+            {!tasks ? null : generateTaskList()}
             <AddTaskButton/>
         </TasksWrapper>
     )

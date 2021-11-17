@@ -199,13 +199,15 @@ const AddTaskButton = () => {
     }
 
     return(
-        <AddTaskCard id='add-task-card' onClick={openModal} >
-            <AddBtn id='add-btn'>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M23.6667 13.6667H13.6667V23.6667H10.3333V13.6667H0.333328V10.3333H10.3333V0.333344H13.6667V10.3333H23.6667V13.6667Z" fill="#DBDFE9"/>
-                </svg>
-            </AddBtn>
-            <AddDesc>Add a Pokémon & Habit</AddDesc>
+        <>
+            <AddTaskCard id='add-task-card' onClick={openModal} >
+                <AddBtn id='add-btn'>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23.6667 13.6667H13.6667V23.6667H10.3333V13.6667H0.333328V10.3333H10.3333V0.333344H13.6667V10.3333H23.6667V13.6667Z" fill="#DBDFE9"/>
+                    </svg>
+                </AddBtn>
+                <AddDesc>Add a Pokémon & Habit</AddDesc>
+            </AddTaskCard>
 
             <ReactModal isOpen={modalVisible} onRequestClose={closeModal} className='modal-override' style={ModalStyles} shouldFocusAfterRender={false}>
                 <ModalTitle>Add a New Habit</ModalTitle>
@@ -221,8 +223,7 @@ const AddTaskButton = () => {
                     </SubmitBtn>
                 </SubmitBtnWrapper>
             </ReactModal>
-
-        </AddTaskCard>
+        </>
     )
 }
 
