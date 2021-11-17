@@ -20,8 +20,8 @@ const TaskList = () => {
 
     const generateTaskList = () => {
 
-        return Object.keys(tasks).map((task) => {
-            return <Task task={task} taskData={tasks[task]}></Task>
+        return Object.keys(tasks).map((task, index) => {
+            return <Task key={index} task={task} taskData={tasks[task]}></Task>
         })
     }
 

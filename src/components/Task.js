@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { writeData } from "../utilities/firebase";
+import { useState } from "react";
 
 const TaskCard = styled.div`
     display: grid;
@@ -32,12 +34,42 @@ const PokeImg = styled.div`
 `
 
 const Task = ({task, taskData}) => {
+    const [completed, setCompleted] = useState(false);
+
+    const markAsComplete = () => {
+        const today = new Date();
+        const todayString = `${today.getDay()}/${today.getMonth()}/${today.getDate()}/${today.getYear()}`;
+        if (!taskData.date.includes(todayString)) {
+            writeData(taskData.level + 1, `${"dummy"}/${task}/level`);
+            taskData.date.push(todayString)
+            writeData(taskData.date, `${"dummy"}/${task}/date`);
+            setCompleted(true);
+            console.log(completed);
+        }
+        else {
+            writeData(taskData.level - 1, `${"dummy"}/${task}/level`);
+            taskData.date.pop();
+            writeData(taskData.date, `${"dummy"}/${task}/date`);
+            setCompleted(false);
+            console.log(completed);
+        }
+        
+    }
+
     return(
-        <TaskCard>
-            <PokeImg/>
+        completed ? 
+        <TaskCard style={{background: 'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%)'}}>
+            <PokeImg onClick={markAsComplete} />
             <p>{taskData.pokemon}</p>
             <p>{task}</p>
-            <p>{taskData.level}</p>
+            <p>Lv. {taskData.level}</p>
+            {/* <h1>{task}</h1> */}
+        </TaskCard> : 
+        <TaskCard>
+            <PokeImg onClick={markAsComplete} />
+            <p>{taskData.pokemon}</p>
+            <p>{task}</p>
+            <p>Lv. {taskData.level}</p>
             {/* <h1>{task}</h1> */}
         </TaskCard>
     )

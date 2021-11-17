@@ -175,9 +175,10 @@ const AddTaskButton = () => {
 
     const handleSubmit = (event) => {
         console.log(taskText);
+        const today = new Date();
         const dbEntry = {
             'pokemon': selectedPokemon,
-            'date': [Date()],
+            'date': [`${today.getDay()}/${today.getMonth()}/${today.getDate()}/${today.getYear()}`],
             'level': 1
         }
         writeData(dbEntry, `${"dummy"}/${taskText}`);
