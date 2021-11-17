@@ -92,11 +92,13 @@ const ModalTaskInput = styled.input`
 
 const PokemonGrid = styled.div`
     display: grid;
+    /* width: 90%; */
     grid-template-columns: repeat(3, 80px);
     grid-template-rows: repeat(auto-fill, 80px);
     column-gap: 23px;
     row-gap: 23px;
-    height: 500px;
+    margin-bottom: 30px;
+    /* height: 500px; */
     >img{
         width: 90%;
         height: 90%;
@@ -113,14 +115,59 @@ const PokemonGrid = styled.div`
     }
 `
 
+const SubmitBtnWrapper = styled.div`
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    justify-content: flex-end;
+`
+
+const SubmitBtn = styled.button`
+    width: 112px;
+    height: 49px;
+    left: 269px;
+    top: 431px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    border: none;
+    :hover{
+        cursor: pointer
+    }
+    >h1{
+        font-style: bold;
+        align-self: center;
+        justify-self: center;
+        margin: 0;
+        color: #1389D2;
+    }
+`
+
+
+
 const AddTaskButton = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [taskText, setTaskText] = useState("");
+    const [selectedPokemon, setSelectedPokemon] = useState("");
     const [user] = useUserState();
 
     const handleChange = (event) => {
         setTaskText(event.target.value);
     };
+
+    const selectPokemon = (pokemon) => {
+        pokemon === selectedPokemon ? setSelectedPokemon("") : setSelectedPokemon(pokemon);
+    }
+
+    const generatePokemon = () => {
+        return pokemonList.map((item, index) => {
+            return(
+                selectedPokemon === item.name?
+                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(item.name)} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} style={{ border: '4px solid #31C3FF'}}/>:
+                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(item.name)} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
+            )
+        })
+    }
     
     const getDatePath = () => {
         return 1;
@@ -141,20 +188,6 @@ const AddTaskButton = () => {
         setModalVisible(false);
     }
 
-    // const PokemonGrid = () => {
-    //     return(
-    //         <div>
-    //             <h1>Choose a Pokemon.</h1>
-    //             {pokemonList.map((item, index) => {
-    //             return(
-    //                 <img key={index} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
-    //             )
-    //         })}
-    //             <h2>pokemonList.</h2>
-    //         </div>
-    //     )
-    // }
-
     return(
         <AddTaskCard id='add-task-card' onClick={openModal} >
             <AddBtn id='add-btn'>
@@ -170,11 +203,13 @@ const AddTaskButton = () => {
                 <ModalTaskInput value={taskText} onChange={handleChange}/>
                 <ModalLabel>Choose a Pokémon</ModalLabel>
                 <PokemonGrid>
-                    {pokemonList.map((item, index) => {
-                        return(
-                            <img key={index} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
-                        )})}
+                    {generatePokemon()}
                 </PokemonGrid>
+                <SubmitBtnWrapper>
+                    <SubmitBtn onClick={handleSubmit}>
+                        <h1>Next</h1>
+                    </SubmitBtn>
+                </SubmitBtnWrapper>
                 {/* {pokemonList.map((item, index) => {
                 return(
                     <img key={index} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
