@@ -16,7 +16,6 @@ const TasksWrapper = styled.div`
 const TaskList = () => {
     const [user] = useUserState();
     const [tasks, loading, error] = useData(user ? user.uid : "dummy");
-    console.log(tasks);
 
     const generateTaskList = () => {
 

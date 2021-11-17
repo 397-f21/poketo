@@ -24,6 +24,9 @@ const TaskCard = styled.div`
 `
 
 const PokeImg = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     grid-area: poke-img;
     width: 72px;
     height: 72px;
@@ -31,27 +34,31 @@ const PokeImg = styled.div`
     background: #F4F7FE;
     align-self: center;
     justify-self: center;
+    >img{
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+    }
 `
 
 const Task = ({task, taskData}) => {
-    const [completed, setCompleted] = useState(false);
+
+    const today = new Date();
+    const todayString = `${today.getDay()}/${today.getMonth()}/${today.getDate()}/${today.getYear()}`;
+    const [completed, setCompleted] = useState(taskData.date.includes(todayString));
 
     const markAsComplete = () => {
-        const today = new Date();
-        const todayString = `${today.getDay()}/${today.getMonth()}/${today.getDate()}/${today.getYear()}`;
         if (!taskData.date.includes(todayString)) {
             writeData(taskData.level + 1, `${"dummy"}/${task}/level`);
             taskData.date.push(todayString)
             writeData(taskData.date, `${"dummy"}/${task}/date`);
             setCompleted(true);
-            console.log(completed);
         }
         else {
             writeData(taskData.level - 1, `${"dummy"}/${task}/level`);
             taskData.date.pop();
             writeData(taskData.date, `${"dummy"}/${task}/date`);
             setCompleted(false);
-            console.log(completed);
         }
         
     }
@@ -59,18 +66,20 @@ const Task = ({task, taskData}) => {
     return(
         completed ? 
         <TaskCard style={{background: 'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%)'}}>
-            <PokeImg onClick={markAsComplete} />
+            <PokeImg onClick={markAsComplete}>
+                <img src={`https://www.serebii.net/swordshield/pokemon/${taskData.number}.png`}></img>
+            </PokeImg>
             <p>{taskData.pokemon}</p>
             <p>{task}</p>
             <p>Lv. {taskData.level}</p>
-            {/* <h1>{task}</h1> */}
         </TaskCard> : 
         <TaskCard>
-            <PokeImg onClick={markAsComplete} />
+            <PokeImg onClick={markAsComplete}>
+                <img src={`https://www.serebii.net/swordshield/pokemon/${taskData.number}.png`}></img>
+            </PokeImg>
             <p>{taskData.pokemon}</p>
             <p>{task}</p>
             <p>Lv. {taskData.level}</p>
-            {/* <h1>{task}</h1> */}
         </TaskCard>
     )
 }

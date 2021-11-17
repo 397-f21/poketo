@@ -149,22 +149,25 @@ const AddTaskButton = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [taskText, setTaskText] = useState("");
     const [selectedPokemon, setSelectedPokemon] = useState("");
+    const [pokemonObj, setPokemonObj] = useState({});
     const [user] = useUserState();
 
     const handleChange = (event) => {
         setTaskText(event.target.value);
     };
 
-    const selectPokemon = (pokemon) => {
+    const selectPokemon = (pokemon, obj) => {
         pokemon === selectedPokemon ? setSelectedPokemon("") : setSelectedPokemon(pokemon);
+        setPokemonObj(obj);
     }
 
     const generatePokemon = () => {
         return pokemonList.map((item, index) => {
             return(
                 selectedPokemon === item.name?
-                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(item.name)} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} style={{ border: '4px solid #31C3FF'}}/>:
-                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(item.name)} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
+                // refactor selectPokemon args
+                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(item.name, item)} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} style={{ border: '4px solid #31C3FF'}}/>:
+                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(item.name, item)} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
             )
         })
     }
@@ -174,11 +177,11 @@ const AddTaskButton = () => {
     }
 
     const handleSubmit = (event) => {
-        console.log(taskText);
         const today = new Date();
         const dbEntry = {
             'pokemon': selectedPokemon,
-            'date': [`${today.getDay()}/${today.getMonth()}/${today.getDate()}/${today.getYear()}`],
+            'number': pokemonObj.number,
+            'date': [``],//${today.getDay()}/${today.getMonth()}/${today.getDate()}/${today.getYear()}`],
             'level': 1
         }
         writeData(dbEntry, `${"dummy"}/${taskText}`);
@@ -217,23 +220,6 @@ const AddTaskButton = () => {
                         <h1>Next</h1>
                     </SubmitBtn>
                 </SubmitBtnWrapper>
-                {/* {pokemonList.map((item, index) => {
-                return(
-                    <img key={index} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
-                )
-                })} */}
-
-                {/* <div onClick={closeModal}>
-                    <svg id='add-btn' width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.8333 5.34167L14.6583 4.16667L9.99996 8.82501L5.34163 4.16667L4.16663 5.34167L8.82496 10L4.16663 14.6583L5.34163 15.8333L9.99996 11.175L14.6583 15.8333L15.8333 14.6583L11.175 10L15.8333 5.34167Z" fill="#DCDCDC"/>
-                    </svg>
-                </div>
-                <div>Add a task!</div>
-                <input type="text" value={taskText} onChange={handleChange}/>
-                <PokemonGrid />
-                
-                <input type="text" value={taskText} onChange={handleChange}/>
-                <br /><button type="submit" onClick={handleSubmit}> Ok </button> */}
             </ReactModal>
 
         </AddTaskCard>
