@@ -175,7 +175,13 @@ const AddTaskButton = () => {
 
     const handleSubmit = (event) => {
         console.log(taskText);
-        writeData(taskText, `${"dummy"}/${getDatePath()}`);
+        const dbEntry = {
+            'pokemon': selectedPokemon,
+            'date': [Date()],
+            'level': 1
+        }
+        writeData(dbEntry, `${"dummy"}/${taskText}`);
+        closeModal();
     };
 
     ReactModal.setAppElement('#root');

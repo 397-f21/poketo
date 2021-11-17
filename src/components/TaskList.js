@@ -18,9 +18,16 @@ const TaskList = () => {
     const [tasks, loading, error] = useData(user ? user.uid : "dummy");
     console.log(tasks);
 
+    const generateTaskList = () => {
+
+        return Object.keys(tasks).map((task) => {
+            return <TaskCard task={tasks[task]}></TaskCard>
+        })
+    }
+
     return (
         <TasksWrapper id='task-wrapper'>
-            <TaskCard task={tasks}/>
+            {loading||error? null : generateTaskList()}
             <AddTaskButton/>
         </TasksWrapper>
     )
