@@ -3,6 +3,7 @@ import styled from "styled-components";
 const TaskCard = styled.div`
     display: grid;
     width: 90%;
+    max-width: 500px;
     height: 105px;
     background: #FFFFFF;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
@@ -14,6 +15,10 @@ const TaskCard = styled.div`
         'poke-img nm-lv'
         'poke-img habit'
         'poke-img exper';
+    &:hover{
+        cursor: pointer;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
+    }
 `
 
 const PokeImg = styled.div`

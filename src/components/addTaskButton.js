@@ -3,15 +3,115 @@ import ReactModal from 'react-modal';
 import { writeData, useUserState } from '../utilities/firebase';
 import { pokemonList } from '../utilities/pokemon.js';
 import Task from './Task';
+import styled from 'styled-components';
 import '../styles/AddTaskButton.css'
 
-const customStyles = {
+const ModalStyles = {
     overlay:{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
-    }
+        justifyContent: 'center',
+    },
 }
+
+const AddTaskCard = styled.div`
+    display: grid;
+    width: 90%;
+    max-width: 500px;
+    height: 105px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 40px 0px 0px 40px;
+    margin-bottom: 10px;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 100%;
+    grid-template-areas: 
+        'add-btn add-desc';
+    :hover{
+        cursor: pointer;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
+        > h1{
+            color: #494949;
+        }
+        path{
+            fill: #494949;;
+        }
+    }
+`
+
+const AddBtn = styled.div`
+    display: flex;
+    grid-area: add-btn;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #F4F7FE;
+    align-self: center;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+`
+
+const AddDesc = styled.h1`
+    grid-area: add-desc;
+    font-size: 16px;
+    color: #DBDFE9;
+    align-self: center;
+`
+
+const ModalTitle = styled.h1`
+    margin: 50px 0 40px 0;
+    font-size: 24px;
+    color: #494949;
+`
+
+const ModalLabel = styled.h2`
+    width: 90%;
+    max-width: 500px;
+    text-align: left;
+    font-size: 16px;
+    color: #848484;
+`
+
+const ModalTaskInput = styled.input`
+    width: 90%;
+    max-width: 500px;
+    height: 45px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    border: none;
+    :focus{
+        outline: none;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
+    }
+    font-size: 16px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+`
+
+const PokemonGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(auto-fill, 80px);
+    column-gap: 23px;
+    row-gap: 23px;
+    height: 500px;
+    >img{
+        width: 90%;
+        height: 90%;
+        border-radius: 50%;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        align-self: center;
+        justify-self: center;
+        :hover{
+            /* border: 5px solid linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%); */
+            border: 4px solid #31C3FF;
+            cursor: pointer;
+        }
+    }
+`
 
 const AddTaskButton = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -41,27 +141,48 @@ const AddTaskButton = () => {
         setModalVisible(false);
     }
 
-    const PokemonGrid = () => {
-        return(
-            <div>
-                <h1>Choose a Pokemon.</h1>
-                {pokemonList.map((item, index) => {
-                return(
-                    <img key={index} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
-                
-                )
-            })}
-                <h2>pokemonList.</h2>
-            </div>
-        )
-    }
+    // const PokemonGrid = () => {
+    //     return(
+    //         <div>
+    //             <h1>Choose a Pokemon.</h1>
+    //             {pokemonList.map((item, index) => {
+    //             return(
+    //                 <img key={index} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
+    //             )
+    //         })}
+    //             <h2>pokemonList.</h2>
+    //         </div>
+    //     )
+    // }
 
     return(
-        <Task onClick={openModal} >
-            <h1>Add Task!</h1>
-            <ReactModal isOpen={modalVisible} onRequestClose={closeModal} className="modal-styling" style={customStyles}>
-                <div onClick={closeModal}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <AddTaskCard id='add-task-card' onClick={openModal} >
+            <AddBtn id='add-btn'>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23.6667 13.6667H13.6667V23.6667H10.3333V13.6667H0.333328V10.3333H10.3333V0.333344H13.6667V10.3333H23.6667V13.6667Z" fill="#DBDFE9"/>
+                </svg>
+            </AddBtn>
+            <AddDesc>Add a Pokémon & Habit</AddDesc>
+
+            <ReactModal isOpen={modalVisible} onRequestClose={closeModal} className='modal-override' style={ModalStyles} shouldFocusAfterRender={false}>
+                <ModalTitle>Add a New Habit</ModalTitle>
+                <ModalLabel>Habit Name (task per day)</ModalLabel>
+                <ModalTaskInput value={taskText} onChange={handleChange}/>
+                <ModalLabel>Choose a Pokémon</ModalLabel>
+                <PokemonGrid>
+                    {pokemonList.map((item, index) => {
+                        return(
+                            <img key={index} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
+                        )})}
+                </PokemonGrid>
+                {/* {pokemonList.map((item, index) => {
+                return(
+                    <img key={index} src={`https://www.serebii.net/swordshield/pokemon/${item.number}.png`} />
+                )
+                })} */}
+
+                {/* <div onClick={closeModal}>
+                    <svg id='add-btn' width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.8333 5.34167L14.6583 4.16667L9.99996 8.82501L5.34163 4.16667L4.16663 5.34167L8.82496 10L4.16663 14.6583L5.34163 15.8333L9.99996 11.175L14.6583 15.8333L15.8333 14.6583L11.175 10L15.8333 5.34167Z" fill="#DCDCDC"/>
                     </svg>
                 </div>
@@ -70,9 +191,10 @@ const AddTaskButton = () => {
                 <PokemonGrid />
                 
                 <input type="text" value={taskText} onChange={handleChange}/>
-                <br /><button type="submit" onClick={handleSubmit}> Ok </button>
+                <br /><button type="submit" onClick={handleSubmit}> Ok </button> */}
             </ReactModal>
-        </Task>
+
+        </AddTaskCard>
     )
 }
 
