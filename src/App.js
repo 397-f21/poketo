@@ -16,12 +16,46 @@ const MainLayout = styled.div`
     position: fixed; //To ensure that "ColorSplashes" do not make the screen scroll
     flex-direction: column;
     background: #84A7EA;
+    z-index: 0;
 `
 
 const Header = styled.div`
     display: flex;
     width: 100%;
     height: 35%;
+`
+
+const HeaderDate = styled.p`
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+    z-index: 1;
+`
+
+const HabitCount = styled.p`
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0px;
+    z-index: 1;
+`
+const HabitsToGo = styled.p`
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    margin: 0px;
+    z-index: 1;
 `
 
 const Content = styled.div`
@@ -48,7 +82,9 @@ function App() {
             <ColorBlender id='color-blender'/>
 
             <Header id='header'/>
-
+              <HeaderDate>Today's Date</HeaderDate>
+              <HabitCount>0/6</HabitCount>
+              <HabitsToGo>Habits To Go</HabitsToGo>
             <Content id='content'>
                 <TaskList />
                 {/* <AddTaskButton /> */}

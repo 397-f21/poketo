@@ -9,6 +9,7 @@ export const ColorSplash1 = styled.div`
     background: #A460D0;
     filter: blur(50px);
     border-radius: 50%;
+    z-index: 0;
 `
 
 export const ColorSplash2 = styled.div`
@@ -20,6 +21,7 @@ export const ColorSplash2 = styled.div`
     background: #31C3FF;
     filter: blur(50px);
     border-radius: 50%;
+    z-index: 0;
 `
 
 export const ColorSplash3 = styled.div`
@@ -31,6 +33,7 @@ export const ColorSplash3 = styled.div`
     background: #8A73D9;;
     filter: blur(50px);
     border-radius: 50%;
+    z-index: 0;
 `
 
 export const ColorSplash4 = styled.div`
@@ -42,6 +45,7 @@ export const ColorSplash4 = styled.div`
     background: #728EE4;
     border-radius: 50%;
     filter: blur(50px);
+    z-index: 0;
 `
 
 export const ColorSplash5 = styled.div`
@@ -52,6 +56,7 @@ export const ColorSplash5 = styled.div`
     top: -113px;
     filter: blur(50px);
     background: #B2EDFC;
+    z-index: 0;
 `
 
 export const ColorBlender = styled.div`
@@ -63,4 +68,5 @@ export const ColorBlender = styled.div`
     background: #FFFFFF;
     filter: blur(150px);
     border-radius: 50%;
+    z-index: 0;
 `

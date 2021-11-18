@@ -11,16 +11,42 @@ const TaskCard = styled.div`
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
     border-radius: 40px 0px 0px 40px;
     margin-bottom: 10px;
-    grid-template-columns: 30% 70%;
-    grid-template-rows: repeat(3, calc(100%/3));
+    grid-template-columns: 28% 54% 18%;
+    grid-template-rows: 37% 19% 44%;
     grid-template-areas: 
-        'poke-img nm-lv'
-        'poke-img habit'
-        'poke-img exper';
+        'poke-img nm lv'
+        'poke-img habit habit'
+        'poke-img exper exper';
     &:hover{
         cursor: pointer;
-        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
+        box-shadow: 0px 0px 20px rgba(19, 137, 210, 0.8);
     }
+`
+
+
+const PokeName = styled.p`
+    grid-area: nm;
+    padding-top: 20px;
+    margin: 0px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #494949;
+`
+const HabitName = styled.p`
+    grid-area: habit; 
+    margin: 0px; 
+    font-weight: bold;
+    font-size: 14px;
+    color: #494949;
+`
+const PokeLv = styled.p`
+    grid-area: lv;
+    margin: 0px;
+    padding-top: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #494949;
 `
 
 const PokeImg = styled.div`
@@ -39,6 +65,23 @@ const PokeImg = styled.div`
         width: 60px;
         height: 60px;
     }
+`
+
+const ExpBar = styled.div`
+    grid-area: exper;
+    width: flex;
+    margin-right: 27px;
+    height: 23px;
+    background: #F3F6FD;
+    border-radius: 20px;
+`
+const ExpText = styled.p`
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 12px;
+    color: #494949;
+    padding: 3px 8px;
+    margin: 0px;
 `
 
 const Task = ({task, taskData}) => {
@@ -69,17 +112,19 @@ const Task = ({task, taskData}) => {
             <PokeImg onClick={markAsComplete}>
                 <img src={`https://www.serebii.net/swordshield/pokemon/${taskData.number}.png`}></img>
             </PokeImg>
-            <p>{taskData.pokemon}</p>
-            <p>{task}</p>
-            <p>Lv. {taskData.level}</p>
+            <PokeName>{taskData.pokemon}</PokeName>
+            <HabitName>{task}</HabitName>
+            <PokeLv>Lv. {taskData.level}</PokeLv>
+            <ExpBar><ExpText>EXP</ExpText></ExpBar>
         </TaskCard> : 
         <TaskCard>
             <PokeImg onClick={markAsComplete}>
                 <img src={`https://www.serebii.net/swordshield/pokemon/${taskData.number}.png`}></img>
             </PokeImg>
-            <p>{taskData.pokemon}</p>
-            <p>{task}</p>
-            <p>Lv. {taskData.level}</p>
+            <PokeName>{taskData.pokemon}</PokeName>
+            <HabitName>{task}</HabitName>
+            <PokeLv>Lv. {taskData.level}</PokeLv>
+            <ExpBar><ExpText>EXP</ExpText></ExpBar>
         </TaskCard>
     )
 }
