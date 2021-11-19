@@ -14,13 +14,3 @@ export const SignOutButton = () => (
         Sign Out
     </button>
 );
-
-const AuthButton = () => {
-    const [user] = useUserState();
-
-    return (
-        user ? <SignOutButton /> : <SignInButton />
-    )
-}
-
-export default AuthButton
