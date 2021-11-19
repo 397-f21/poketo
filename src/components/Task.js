@@ -106,24 +106,28 @@ const Task = ({taskName, taskData}) => {
         
     }
 
+    const evoIndex = () => {
+        return (taskData.level < 21) ? 0 : (taskData.level < 90) ? 1 : 2;
+    }
+
     console.log(taskName)
 
     return(
         completed ? 
         <TaskCard style={{background: 'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%)'}}>
             <PokeImg onClick={markAsComplete}>
-                <img src={`https://www.serebii.net/swordshield/pokemon/${taskData.number}.png`}></img>
+                <img src={`https://www.serebii.net/swordshield/pokemon/${taskData.numbers[evoIndex()]}.png`}></img>
             </PokeImg>
-            <PokeName>{taskData.pokemon}</PokeName>
+            <PokeName>{taskData.pokemon[evoIndex()]}</PokeName>
             <HabitName>{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
         </TaskCard> : 
         <TaskCard>
             <PokeImg onClick={markAsComplete}>
-                <img src={`https://www.serebii.net/swordshield/pokemon/${taskData.number}.png`}></img>
+                <img src={`https://www.serebii.net/swordshield/pokemon/${taskData.numbers[evoIndex()]}.png`}></img>
             </PokeImg>
-            <PokeName>{taskData.pokemon}</PokeName>
+            <PokeName>{taskData.pokemon[evoIndex()]}</PokeName>
             <HabitName>{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
             <ExpBar><ExpText>EXP</ExpText></ExpBar>

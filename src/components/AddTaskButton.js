@@ -161,8 +161,8 @@ const AddTaskButton = () => {
         return pokemonList.map((pokemon, index) => {
             return(
                 selectedPokeObj.name === pokemon.name?
-                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.number}.png`} style={{ border: '4px solid #31C3FF'}}/>:
-                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.number}.png`} />
+                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.numbers[0]}.png`} style={{ border: '4px solid #31C3FF'}}/>:
+                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.numbers[0]}.png`} />
             )
         })
     }
