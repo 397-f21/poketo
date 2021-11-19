@@ -174,7 +174,7 @@ const AddTaskButton = () => {
             'date': [''],
             'level': 1
         }
-        writeData(dbEntry, `${"dummy"}/${taskText}`);
+        writeData(dbEntry, `${user ? user.uid : "dummy"}/${taskText}`);
         closeModal();
     };
 

@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase, onValue, ref, set } from 'firebase/database';
 import { useState, useEffect } from 'react';
-import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithRedirect, signOut } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyB_2BJla8QmrO6WIpANUwTfaVyDPgJeRAA",
@@ -46,7 +46,7 @@ export const writeData = (data, path) => {
 };
 
 export const signInWithGoogle = () => {
-  signInWithPopup(getAuth(firebase), new GoogleAuthProvider())
+  signInWithRedirect(getAuth(firebase), new GoogleAuthProvider())
   .catch((error) => {
     console.log(error.message);
   });
