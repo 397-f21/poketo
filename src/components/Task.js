@@ -105,6 +105,8 @@ const Task = ({taskName, taskData}) => {
         
     }
 
+    console.log(taskName)
+
     return(
         completed ? 
         <TaskCard style={{background: 'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%)'}}>
