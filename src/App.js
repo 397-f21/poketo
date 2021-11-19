@@ -8,6 +8,7 @@ import {ColorSplash1,
         ColorSplash4, 
         ColorSplash5, 
         ColorBlender} from './styles/ColorSplash';
+import AuthButton from './utilities/auth'
 
 const MainLayout = styled.div`
     height: 100vh;
@@ -87,6 +88,7 @@ function App() {
               <HabitsToGo>Habits To Go</HabitsToGo>
             <Content id='content'>
                 <TaskList />
+                <AuthButton />
                 {/* <AddTaskButton /> */}
             </Content>
 

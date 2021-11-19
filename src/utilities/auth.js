@@ -1,17 +1,26 @@
-import Button from 'react-bootstrap/Button'
 import {signInWithGoogle, signOut } from '../utilities/firebase';
-import {getSigninButtonStyling} from '../utilities/time';
+import { useUserState } from '../utilities/firebase.js';
 
 export const SignInButton = () => (
-    <Button
-        onClick={() => signInWithGoogle()} className='signin-button-styling' >
+    <button
+        onClick={() => signInWithGoogle()} >
         Sign In
-    </Button>
+    </button>
 );
 
 export const SignOutButton = () => (
-    <Button
-        onClick={() => signOut()} className='signin-button-styling'>
+    <button
+        onClick={() => signOut()} >
         Sign Out
-    </Button>
+    </button>
 );
+
+const AuthButton = () => {
+    const [user] = useUserState();
+
+    return (
+        user ? <SignOutButton /> : <SignInButton />
+    )
+}
+
+export default AuthButton
