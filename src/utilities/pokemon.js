@@ -1,7 +1,7 @@
 export const pokemonList =[
     {
         name: "Bulbasaur",
-        number: "001",
+        numbers: ["001", "002", "003"],
         evolutions: [
             "Bulbasaur",
             "Ivysaur",
@@ -10,7 +10,7 @@ export const pokemonList =[
     },
     {
         name: "Charmander",
-        number: "004",
+        numbers: ["004", "005", "006"],
         evolutions: [
             "Charmander",
             "Charmeleon",
@@ -19,7 +19,7 @@ export const pokemonList =[
     },
     {
         name: "Squirtle",
-        number: "007",
+        numbers: ["007", "008", "009"],
         evolutions: [
             "Squirtle",
             "Wartortle",
