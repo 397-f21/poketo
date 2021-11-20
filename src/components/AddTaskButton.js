@@ -169,8 +169,7 @@ const AddTaskButton = () => {
 
     const handleSubmit = (event) => {
         const dbEntry = {
-            'pokemon': selectedPokeObj.evolutions,
-            'numbers': selectedPokeObj.numbers,
+            'pokemon': selectedPokeObj.name,
             'date': [''],
             'level': 1
         }
