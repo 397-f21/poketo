@@ -19,6 +19,7 @@ const AddTaskCard = styled.div`
     width: 90%;
     max-width: 500px;
     height: 105px;
+    min-height: 105px;
     background: #FFFFFF;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
     border-radius: 40px 0px 0px 40px;

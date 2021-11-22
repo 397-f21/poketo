@@ -8,9 +8,10 @@ const TasksWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: 85%;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow: scroll;
 `
 const PartyPokemon = styled.h1`
     padding-top: 10px;
@@ -33,10 +34,10 @@ const TaskList = () => {
 
     return (
         <>
-            <PartyPokemon>YOUR POKÉMON</PartyPokemon>
             <TasksWrapper id='task-wrapper'>
-                {!tasks ? null : generateTaskList()}
+                <PartyPokemon>YOUR POKÉMON</PartyPokemon>
                 <AddTaskButton/>
+                {!tasks ? null : generateTaskList()}
             </TasksWrapper>
         </>
     )

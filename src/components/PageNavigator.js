@@ -25,6 +25,9 @@ const Header = styled.div`
         display: flex;
         width: 100%;
         height: 35%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     `
 
 const HeaderDate = styled.p`
@@ -33,7 +36,7 @@ const HeaderDate = styled.p`
         font-weight: bold;
         font-size: 20px;
         line-height: 30px;
-        text-align: center;
+        /* text-align: center; */
         color: #FFFFFF;
         z-index: 1;
     `
@@ -43,7 +46,7 @@ const HabitCount = styled.p`
         font-weight: 900;
         font-size: 40px;
         line-height: 30px;
-        text-align: center;
+        /* text-align: center; */
         color: #FFFFFF;
         margin: 0px;
         z-index: 1;
@@ -53,7 +56,7 @@ const HabitsToGo = styled.p`
         font-weight: 700;
         font-size: 10px;
         line-height: 30px;
-        text-align: center;
+        /* text-align: center; */
         color: #FFFFFF;
         text-transform: uppercase;
         margin: 0px;
@@ -64,12 +67,15 @@ const Content = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         width: 100%;
-        flex-grow: 1;
+        height: 65%;
+        /* flex-grow: 1; */
         background: rgba(255, 255, 255, 0.9);
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
         border-radius: 50px 50px 0px 0px;
         z-index: 2;
+        /* overflow: scroll; */
     `
 
 const PageNavigator = () => {
@@ -87,11 +93,13 @@ const PageNavigator = () => {
                 <ColorSplash2 id='splash2' />
                 <ColorSplash1 id='splash1' />
                 <ColorBlender id='color-blender' />
+                
 
-                <Header id='header' />
-                <HeaderDate>Today's Date</HeaderDate>
-                <HabitCount>0/6</HabitCount>
-                <HabitsToGo>Habits To Go</HabitsToGo>
+                <Header id='header'>
+                    <HeaderDate>Today's Date</HeaderDate>
+                    <HabitCount>0/6</HabitCount>
+                    <HabitsToGo>Habits To Go</HabitsToGo>
+                </Header>
                 <Content id='content'>
                     <TaskList />
                     <SignOutButton />
