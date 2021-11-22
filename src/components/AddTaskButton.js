@@ -60,7 +60,7 @@ const AddDesc = styled.h1`
 `
 
 const ModalTitle = styled.h1`
-    margin: 50px 0 40px 0;
+    margin: 50px 0 50px 0;
     font-size: 24px;
     color: #494949;
 `
@@ -149,6 +149,16 @@ const SubmitBtn = styled.button`
         color: #1389D2;
     }
 `
+
+const HeaderWrapper = styled.div`
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 112px;
+`
+
 const BackBtn = styled.button`
     width: 112px;
     height: 49px;
@@ -229,12 +239,12 @@ const AddTaskButton = () => {
             </AddTaskCard>
 
             <ReactModal isOpen={modalVisible} onRequestClose={closeModal} className='modal-override' style={ModalStyles} shouldFocusAfterRender={false}>
-                <div>
+                <HeaderWrapper>
                     <BackBtn onClick={closeModal}>
                         <h1> &#60; </h1>
                     </BackBtn>
                     <ModalTitle>Add a New Habit</ModalTitle>
-                </div>
+                </HeaderWrapper>
                 <ModalLabel>Habit Name (task per day)</ModalLabel>
                 <ModalTaskInput value={taskText} onChange={handleChange} />
                 <ModalLabel>Choose a Pokémon</ModalLabel>
