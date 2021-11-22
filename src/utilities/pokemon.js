@@ -25,5 +25,32 @@ export const pokemonList =[
             "Wartortle",
             "Blastoise"
         ]
+    },
+    {
+        name: "Pichu",
+        numbers: ["172", "025", "026"],
+        evolutions: [
+            "Pichu",
+            "Pikachu",
+            "Raichu"
+        ]
+    },
+    {
+        name: "Dratini",
+        numbers: ["147", "148", "149"],
+        evolutions: [
+            "Dratini",
+            "Dragonair",
+            "Dragonite"
+        ]
+    },
+    {
+        name: "Gastly",
+        numbers: ["092", "093", "094"],
+        evolutions: [
+            "Gastly",
+            "Haunter",
+            "Gengar"
+        ]
     }
 ]
