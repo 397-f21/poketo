@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useUserState } from '../utilities/firebase.js';
+import { useUserState, useData } from '../utilities/firebase.js';
 import { SignInButton, SignOutButton } from '../utilities/auth.js';
 import TaskList from './TaskList';
 import {
@@ -10,6 +10,7 @@ import {
     ColorSplash5,
     ColorBlender
 } from '../styles/ColorSplash';
+import {todayKey} from '../utilities/time';
 
 const MainLayout = styled.div`
         height: 100vh;
@@ -80,6 +81,19 @@ const Content = styled.div`
 
 const PageNavigator = () => {
     const [user] = useUserState();
+    const [tasks, loading, error] = useData(user ? user.uid : "dummy");
+
+    const getNumCompletedTasks = () => {
+        return tasks ? Object.keys(tasks).filter((taskName) => tasks[taskName].date.includes(todayKey)).length : 0;
+    }
+
+    const getNumTasksTotal = () => {
+        return tasks ? Object.keys(tasks).length : 0;
+    }
+
+    const getTasksFraction = () => {
+        return `${getNumCompletedTasks()}/${getNumTasksTotal()}`;
+    }
 
     return (
         !user ?
@@ -97,11 +111,11 @@ const PageNavigator = () => {
 
                 <Header id='header'>
                     <HeaderDate>Today's Date</HeaderDate>
-                    <HabitCount>0/6</HabitCount>
-                    <HabitsToGo>Habits To Go</HabitsToGo>
+                    <HabitCount>{getTasksFraction()}</HabitCount>
+                    <HabitsToGo>Habits Completed</HabitsToGo>
                 </Header>
                 <Content id='content'>
-                    <TaskList />
+                    <TaskList tasks={tasks}/>
                     <SignOutButton />
                     {/* <AddTaskButton /> */}
                 </Content>
