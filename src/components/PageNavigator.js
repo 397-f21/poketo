@@ -78,7 +78,7 @@ const PageNavigator = () => {
     return (
         !user ?
             <MainLayout>
-                <SignInButton />
+                <SignInButton data-cy="sign-in"/>
             </MainLayout> :
             <MainLayout>
                 <ColorSplash5 id='splash5' />
