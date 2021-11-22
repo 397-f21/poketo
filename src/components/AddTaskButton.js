@@ -200,8 +200,8 @@ const AddTaskButton = () => {
         return pokemonList.map((pokemon, index) => {
             return (
                 selectedPokeObj.name === pokemon.name ?
-                    <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.numbers[0]}.png`} style={{ border: '4px solid #31C3FF' }} /> :
-                    <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.numbers[0]}.png`} />
+                    <img data-cy={`${pokemon.name}-input`} key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.numbers[0]}.png`} style={{ border: '4px solid #31C3FF' }} /> :
+                    <img data-cy={`${pokemon.name}-input`} key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.numbers[0]}.png`} />
             )
         })
     }
@@ -230,7 +230,7 @@ const AddTaskButton = () => {
     return (
         <>
             <AddTaskCard id='add-task-card' onClick={openModal} >
-                <AddBtn id='add-btn'>
+                <AddBtn id='add-btn' data-cy="add-task">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M23.6667 13.6667H13.6667V23.6667H10.3333V13.6667H0.333328V10.3333H10.3333V0.333344H13.6667V10.3333H23.6667V13.6667Z" fill="#DBDFE9" />
                     </svg>
@@ -246,13 +246,13 @@ const AddTaskButton = () => {
                     <ModalTitle>Add a New Habit</ModalTitle>
                 </HeaderWrapper>
                 <ModalLabel>Habit Name (task per day)</ModalLabel>
-                <ModalTaskInput value={taskText} onChange={handleChange} />
+                <ModalTaskInput value={taskText} data-cy="task-input" onChange={handleChange} />
                 <ModalLabel>Choose a Pokémon</ModalLabel>
                 <PokemonGrid>
                     {generatePokemon()}
                 </PokemonGrid>
                 <SubmitBtnWrapper>
-                    <SubmitBtn onClick={handleSubmit} disabled={submitDisabled}>
+                    <SubmitBtn data-cy="submit-btn" onClick={handleSubmit} disabled={submitDisabled}>
                         <h1>Next</h1>
                     </SubmitBtn>
                 </SubmitBtnWrapper>

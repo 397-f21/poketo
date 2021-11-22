@@ -134,7 +134,7 @@ const Task = ({taskName, taskData}) => {
                 <img src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
             </PokeImg>
             <PokeName>{pokemonName()}</PokeName>
-            <HabitName>{taskName}</HabitName>
+            <HabitName  data-cy="task-name">{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
         </TaskCard> : 
@@ -143,7 +143,7 @@ const Task = ({taskName, taskData}) => {
                 <img src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
             </PokeImg>
             <PokeName>{pokemonName()}</PokeName>
-            <HabitName>{taskName}</HabitName>
+            <HabitName data-cy="task-name">{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
         </TaskCard>

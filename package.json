@@ -40,6 +40,8 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^9.0.0"
+    "cypress": "^9.0.0",
+    "cypress-firebase": "^2.0.0",
+    "firebase-admin": "^10.0.0"
   }
 }
