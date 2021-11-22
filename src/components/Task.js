@@ -133,7 +133,7 @@ const Task = ({taskName, taskData}) => {
             <PokeImg onClick={markAsComplete}>
                 <img src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
             </PokeImg>
-            <PokeName>{pokemonName()}</PokeName>
+            <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName  data-cy="task-name">{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
@@ -142,7 +142,7 @@ const Task = ({taskName, taskData}) => {
             <PokeImg onClick={markAsComplete}>
                 <img src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
             </PokeImg>
-            <PokeName>{pokemonName()}</PokeName>
+            <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName data-cy="task-name">{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
             <ExpBar><ExpText>EXP</ExpText></ExpBar>

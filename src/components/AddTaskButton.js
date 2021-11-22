@@ -240,7 +240,7 @@ const AddTaskButton = () => {
 
             <ReactModal isOpen={modalVisible} onRequestClose={closeModal} className='modal-override' style={ModalStyles} shouldFocusAfterRender={false}>
                 <HeaderWrapper>
-                    <BackBtn onClick={closeModal}>
+                    <BackBtn data-cy="back-btn" onClick={closeModal}>
                         <h1> &#60; </h1>
                     </BackBtn>
                     <ModalTitle>Add a New Habit</ModalTitle>
