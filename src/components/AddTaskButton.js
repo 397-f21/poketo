@@ -132,7 +132,14 @@ const SubmitBtn = styled.button`
     border-radius: 20px;
     border: none;
     :hover{
-        cursor: pointer
+        cursor: pointer;
+    }
+    :disabled{
+        cursor: not-allowed;
+        background: #EEEEEE;
+    }
+    :disabled >h1 {
+        color: #AAAAAA;
     }
     >h1{
         font-style: bold;
@@ -150,7 +157,7 @@ const BackBtn = styled.button`
     background: #FFFFFF;
     border: none;
     :hover{
-        cursor: pointer
+        cursor: pointer;
     }
     >h1{
         font-style: bold;
@@ -166,13 +173,17 @@ const AddTaskButton = () => {
     const [taskText, setTaskText] = useState("");
     const [selectedPokeObj, setSelectedPokeObj] = useState({}); // UNUSED
     const [user] = useUserState();
+    const [submitDisabled, setSubmitDisabled] = useState(false);
 
     const handleChange = (event) => {
         setTaskText(event.target.value);
+        setSubmitDisabled((Object.keys(selectedPokeObj).length === 0) || event.target.value === "");
     };
 
     const selectPokemon = (pokeObj) => {
-        pokeObj.name === selectedPokeObj.name ? setSelectedPokeObj({}) : setSelectedPokeObj(pokeObj);
+        const currPokeObj = pokeObj.name === selectedPokeObj.name ? {} : pokeObj;
+        setSelectedPokeObj(currPokeObj);
+        setSubmitDisabled((Object.keys(currPokeObj).length === 0) || taskText === "");
     }
 
     const generatePokemon = () => {
@@ -186,20 +197,19 @@ const AddTaskButton = () => {
     }
 
     const handleSubmit = (event) => {
-        if (Object.keys(selectedPokeObj).length > 0) {
-            const dbEntry = {
-                'pokemon': selectedPokeObj.name,
-                'date': [''],
-                'level': 1
-            }
-            writeData(dbEntry, `${user ? user.uid : "dummy"}/${taskText}`);
-            closeModal();
+        const dbEntry = {
+            'pokemon': selectedPokeObj.name,
+            'date': [''],
+            'level': 1
         }
+        writeData(dbEntry, `${user ? user.uid : "dummy"}/${taskText}`);
+        closeModal();
     };
 
     ReactModal.setAppElement('#root');
 
     const openModal = () => {
+        setSubmitDisabled((Object.keys(selectedPokeObj).length === 0) || taskText === "");
         setModalVisible(true);
     }
 
@@ -232,7 +242,7 @@ const AddTaskButton = () => {
                     {generatePokemon()}
                 </PokemonGrid>
                 <SubmitBtnWrapper>
-                    <SubmitBtn onClick={handleSubmit}>
+                    <SubmitBtn onClick={handleSubmit} disabled={submitDisabled}>
                         <h1>Next</h1>
                     </SubmitBtn>
                 </SubmitBtnWrapper>
