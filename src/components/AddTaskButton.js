@@ -4,10 +4,10 @@ import { writeData, useUserState } from '../utilities/firebase';
 import { pokemonList } from '../utilities/pokemon.js';
 import styled from 'styled-components';
 import '../styles/AddTaskButton.css'
-import {todayKey} from '../utilities/time';
+import { todayKey } from '../utilities/time';
 
 const ModalStyles = {
-    overlay:{
+    overlay: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -142,6 +142,24 @@ const SubmitBtn = styled.button`
         color: #1389D2;
     }
 `
+const BackBtn = styled.button`
+    width: 112px;
+    height: 49px;
+    left: 269px;
+    top: 431px;
+    background: #FFFFFF;
+    border: none;
+    :hover{
+        cursor: pointer
+    }
+    >h1{
+        font-style: bold;
+        align-self: center;
+        justify-self: center;
+        margin: 0;
+        color: #1389D2;
+    }
+`
 
 const AddTaskButton = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -159,22 +177,24 @@ const AddTaskButton = () => {
 
     const generatePokemon = () => {
         return pokemonList.map((pokemon, index) => {
-            return(
-                selectedPokeObj.name === pokemon.name?
-                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.numbers[0]}.png`} style={{ border: '4px solid #31C3FF'}}/>:
-                <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.numbers[0]}.png`} />
+            return (
+                selectedPokeObj.name === pokemon.name ?
+                    <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.numbers[0]}.png`} style={{ border: '4px solid #31C3FF' }} /> :
+                    <img key={index} alt='pokemonimg' onClick={() => selectPokemon(pokemon)} src={`https://www.serebii.net/swordshield/pokemon/${pokemon.numbers[0]}.png`} />
             )
         })
     }
 
     const handleSubmit = (event) => {
-        const dbEntry = {
-            'pokemon': selectedPokeObj.name,
-            'date': [''],
-            'level': 1
+        if (Object.keys(selectedPokeObj).length > 0) {
+            const dbEntry = {
+                'pokemon': selectedPokeObj.name,
+                'date': [''],
+                'level': 1
+            }
+            writeData(dbEntry, `${user ? user.uid : "dummy"}/${taskText}`);
+            closeModal();
         }
-        writeData(dbEntry, `${user ? user.uid : "dummy"}/${taskText}`);
-        closeModal();
     };
 
     ReactModal.setAppElement('#root');
@@ -187,21 +207,26 @@ const AddTaskButton = () => {
         setModalVisible(false);
     }
 
-    return(
+    return (
         <>
             <AddTaskCard id='add-task-card' onClick={openModal} >
                 <AddBtn id='add-btn'>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M23.6667 13.6667H13.6667V23.6667H10.3333V13.6667H0.333328V10.3333H10.3333V0.333344H13.6667V10.3333H23.6667V13.6667Z" fill="#DBDFE9"/>
+                        <path d="M23.6667 13.6667H13.6667V23.6667H10.3333V13.6667H0.333328V10.3333H10.3333V0.333344H13.6667V10.3333H23.6667V13.6667Z" fill="#DBDFE9" />
                     </svg>
                 </AddBtn>
                 <AddDesc>Add a Pokémon & Habit</AddDesc>
             </AddTaskCard>
 
             <ReactModal isOpen={modalVisible} onRequestClose={closeModal} className='modal-override' style={ModalStyles} shouldFocusAfterRender={false}>
-                <ModalTitle>Add a New Habit</ModalTitle>
+                <div>
+                    <BackBtn onClick={closeModal}>
+                        <h1> &#60; </h1>
+                    </BackBtn>
+                    <ModalTitle>Add a New Habit</ModalTitle>
+                </div>
                 <ModalLabel>Habit Name (task per day)</ModalLabel>
-                <ModalTaskInput value={taskText} onChange={handleChange}/>
+                <ModalTaskInput value={taskText} onChange={handleChange} />
                 <ModalLabel>Choose a Pokémon</ModalLabel>
                 <PokemonGrid>
                     {generatePokemon()}
