@@ -167,7 +167,7 @@ const Task = ({taskName, taskData}) => {
             <PokeLv>Lv. {taskData.level}</PokeLv>
             {/* <button onClick={deleteTask}>delete </button> */}
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
-            <DeleteIcon onClick={deleteTask}> X </DeleteIcon>
+            <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask}> X </DeleteIcon>
         </TaskCard> : 
         <TaskCard>
             <PokeImg onClick={markAsComplete}>
@@ -178,7 +178,7 @@ const Task = ({taskName, taskData}) => {
             <PokeLv>Lv. {taskData.level}</PokeLv>
             {/* <button onClick={deleteTask}>delete </button> */}
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
-            <DeleteIcon onClick={deleteTask}> X </DeleteIcon>
+            <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask}> X </DeleteIcon>
         </TaskCard>
     )
 }
