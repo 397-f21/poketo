@@ -14,14 +14,14 @@ const TaskCard = styled.div`
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
     border-radius: 40px 0px 0px 40px;
     margin-bottom: 10px;
-    grid-template-columns: 28% 54% 18%;
+    grid-template-columns: 28% 54% 12% 6%;
     grid-template-rows: 37% 19% 44%;
     grid-template-areas: 
-        'poke-img nm lv'
-        'poke-img habit habit'
-        'poke-img exper exper';
+        'poke-img nm lv delete'
+        'poke-img habit habit delete'
+        'poke-img exper exper delete';
     &:hover{
-        cursor: pointer;
+        /* cursor: pointer; */
         box-shadow: 0px 0px 20px rgba(19, 137, 210, 0.8);
     }
 `
@@ -67,6 +67,9 @@ const PokeImg = styled.div`
         width: 60px;
         height: 60px;
     }
+    :hover{
+        cursor: pointer;
+    }
 `
 
 const ExpBar = styled.div`
@@ -84,6 +87,17 @@ const ExpText = styled.p`
     color: #494949;
     padding: 3px 8px;
     margin: 0px;
+`
+
+const DeleteIcon = styled.p`
+    /* position: relative;
+    right: 5px;
+    top: 5px; */
+    grid-area: delete;
+    font-weight: bold;
+    :hover{
+        cursor: pointer;
+    }
 `
 
 // const DeleteIcon = styled.div`
@@ -151,8 +165,9 @@ const Task = ({taskName, taskData}) => {
             <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName  data-cy="task-name">{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
-            <button onClick={deleteTask}>delete </button>
+            {/* <button onClick={deleteTask}>delete </button> */}
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
+            <DeleteIcon onClick={deleteTask}> X </DeleteIcon>
         </TaskCard> : 
         <TaskCard>
             <PokeImg onClick={markAsComplete}>
@@ -161,8 +176,9 @@ const Task = ({taskName, taskData}) => {
             <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName data-cy="task-name">{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
-            <button onClick={deleteTask}>delete </button>
+            {/* <button onClick={deleteTask}>delete </button> */}
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
+            <DeleteIcon onClick={deleteTask}> X </DeleteIcon>
         </TaskCard>
     )
 }
