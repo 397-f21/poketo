@@ -24,7 +24,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:cypress/recommended"
     ]
   },
   "browserslist": {
@@ -40,8 +41,9 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^9.0.0",
+    "cypress": "^9.1.0",
     "cypress-firebase": "^2.0.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "firebase-admin": "^10.0.0"
   }
 }
