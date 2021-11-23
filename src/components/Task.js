@@ -159,23 +159,23 @@ const Task = ({taskName, taskData}) => {
     return(
         completed ? 
         <TaskCard style={{background: 'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%)'}}>
-            <PokeImg onClick={markAsComplete}>
+            <PokeImg data-cy={taskName} onClick={markAsComplete}>
                 <img src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
             </PokeImg>
             <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName  data-cy="task-name">{taskName}</HabitName>
-            <PokeLv>Lv. {taskData.level}</PokeLv>
+            <PokeLv data-cy='pokemon-level'>Lv. {taskData.level}</PokeLv>
             {/* <button onClick={deleteTask}>delete </button> */}
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
             <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask}> X </DeleteIcon>
         </TaskCard> : 
         <TaskCard>
-            <PokeImg onClick={markAsComplete}>
+            <PokeImg data-cy={taskName} onClick={markAsComplete}>
                 <img src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
             </PokeImg>
             <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName data-cy="task-name">{taskName}</HabitName>
-            <PokeLv>Lv. {taskData.level}</PokeLv>
+            <PokeLv data-cy='pokemon-level'>Lv. {taskData.level}</PokeLv>
             {/* <button onClick={deleteTask}>delete </button> */}
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
             <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask}> X </DeleteIcon>

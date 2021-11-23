@@ -111,7 +111,7 @@ const PageNavigator = () => {
 
                 <Header id='header'>
                     <HeaderDate>Today's Date</HeaderDate>
-                    <HabitCount>{getTasksFraction()}</HabitCount>
+                    <HabitCount data-cy='habit-count'>{getTasksFraction()}</HabitCount>
                     <HabitsToGo>Habits Completed</HabitsToGo>
                 </Header>
                 <Content id='content'>

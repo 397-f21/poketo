@@ -95,19 +95,23 @@ const PokemonGrid = styled.div`
     /* overflow-y: scroll; */
 
     display: grid;
-    /* width: 90%; */
-    /* height: 20px; */
-    grid-template-columns: repeat(3, 80px);
-    grid-template-rows: repeat(auto-fill, 80px);
+    width: 90%;
+    height: 30%;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(auto-fit, 90px);
     column-gap: 23px;
     row-gap: 23px;
-    margin-bottom: 30px;
+    padding-bottom: 30px;
     /* height: 500px; */
     >img{
-        width: 90%;
-        height: 90%;
-        min-width: 80px;
-        min-height: 80px;
+        /* width: 90%;
+        height: 90%; */
+        min-width: 72px;
+        min-height: 72px;
+        max-width: 72px;
+        max-height: 72px;
         border-radius: 50%;
         background: #FFFFFF;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
@@ -170,7 +174,7 @@ const BackBtn = styled.button`
     height: 49px;
     left: 269px;
     top: 431px;
-    background: #FFFFFF;
+    background: transparent;
     border: none;
     :hover{
         cursor: pointer;
