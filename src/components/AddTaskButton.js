@@ -92,8 +92,11 @@ const ModalTaskInput = styled.input`
 `
 
 const PokemonGrid = styled.div`
+    /* overflow-y: scroll; */
+
     display: grid;
     /* width: 90%; */
+    /* height: 20px; */
     grid-template-columns: repeat(3, 80px);
     grid-template-rows: repeat(auto-fill, 80px);
     column-gap: 23px;
@@ -103,6 +106,8 @@ const PokemonGrid = styled.div`
     >img{
         width: 90%;
         height: 90%;
+        min-width: 80px;
+        min-height: 80px;
         border-radius: 50%;
         background: #FFFFFF;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
@@ -249,7 +254,7 @@ const AddTaskButton = () => {
                 <ModalLabel>Habit Name (task per day)</ModalLabel>
                 <ModalTaskInput value={taskText} data-cy="task-input" onChange={handleChange} />
                 <ModalLabel>Choose a Pokémon</ModalLabel>
-                <PokemonGrid>
+                <PokemonGrid id='pokemon-grid'>
                     {generatePokemon()}
                 </PokemonGrid>
                 <SubmitBtnWrapper>
