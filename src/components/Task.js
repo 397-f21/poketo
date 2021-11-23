@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { writeData, useUserState } from "../utilities/firebase";
+import { writeData, useUserState, deleteData } from "../utilities/firebase";
 import { useState } from "react";
 import {todayKey} from '../utilities/time';
-import { pokemonList } from '../utilities/pokemon.js';
+import { pokemonList } from '../utilities/pokemon.js'; 
 
 const TaskCard = styled.div`
     display: grid;
@@ -86,10 +86,27 @@ const ExpText = styled.p`
     margin: 0px;
 `
 
+
+
+
 const Task = ({taskName, taskData}) => {
 
     const [completed, setCompleted] = useState(taskData.date.includes(todayKey));
     const [user] = useUserState();
+
+    const deleteTask = () => {
+        deleteData(`${user ? user.id : "dummy"}/${taskName}`);
+    }
+
+    const DeleteButton = () => {
+        return(
+        <button
+            data-cy="sign-out"
+            onClick={() => deleteTask()}>
+            Delete task
+        </button>
+        )
+    }
 
     const markAsComplete = () => {
         if (!taskData.date.includes(todayKey)) {
@@ -136,6 +153,7 @@ const Task = ({taskName, taskData}) => {
             <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName  data-cy="task-name">{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
+            <DeleteButton/>
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
         </TaskCard> : 
         <TaskCard>
@@ -145,6 +163,7 @@ const Task = ({taskName, taskData}) => {
             <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName data-cy="task-name">{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
+            <DeleteButton/>
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
         </TaskCard>
     )

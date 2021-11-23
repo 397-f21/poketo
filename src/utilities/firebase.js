@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, onValue, ref, set } from 'firebase/database';
+import { getDatabase, onValue, ref, set, remove } from 'firebase/database';
 import { useState, useEffect } from 'react';
 import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut } from 'firebase/auth';
 
@@ -43,6 +43,10 @@ export const useData = (path, transform) => {
 
 export const writeData = (data, path) => {
   set(ref(database, path), data);
+};
+
+export const deleteData = (path) => {
+  remove(ref(database, path));
 };
 
 export const signInWithGoogle = () => {
