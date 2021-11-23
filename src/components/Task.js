@@ -26,7 +26,6 @@ const TaskCard = styled.div`
     }
 `
 
-
 const PokeName = styled.p`
     grid-area: nm;
     padding-top: 20px;
@@ -87,6 +86,14 @@ const ExpText = styled.p`
     margin: 0px;
 `
 
+// const DeleteIcon = styled.div`
+//     grid-area: delete;
+//     width: flex;
+//     margin-right: 27px;
+//     height: 23px;
+//     background: #F3F6FD;
+//     border-radius: 20px;
+// `
 
 
 
@@ -96,17 +103,7 @@ const Task = ({taskName, taskData}) => {
     const [user] = useUserState();
 
     const deleteTask = () => {
-        deleteData(`${user ? user.id : "dummy"}/${taskName}`);
-    }
-
-    const DeleteButton = () => {
-        return(
-        <button
-            data-cy="sign-out"
-            onClick={() => deleteTask()}>
-            Delete task
-        </button>
-        )
+        deleteData(`${user ? user.uid : "dummy"}/${taskName}`);
     }
 
     const markAsComplete = () => {
@@ -154,7 +151,7 @@ const Task = ({taskName, taskData}) => {
             <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName  data-cy="task-name">{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
-            <DeleteButton/>
+            <button onClick={deleteTask}>delete </button>
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
         </TaskCard> : 
         <TaskCard>
@@ -164,7 +161,7 @@ const Task = ({taskName, taskData}) => {
             <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName data-cy="task-name">{taskName}</HabitName>
             <PokeLv>Lv. {taskData.level}</PokeLv>
-            <DeleteButton/>
+            <button onClick={deleteTask}>delete </button>
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
         </TaskCard>
     )
