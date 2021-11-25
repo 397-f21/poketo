@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useUserState, useData } from '../utilities/firebase.js';
+import { useState } from "react";
 import { SignInButton, SignOutButton } from '../utilities/auth.js';
 import TaskList from './TaskList';
 import {
@@ -110,9 +111,56 @@ const Content = styled.div`
         /* overflow: scroll; */
     `
 
+const DetailedPokeName = styled.p`
+    grid-area: nm;
+    padding-top: 20px;
+    margin: 0px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #494949;
+`
+const DetailedHabitName = styled.p`
+    grid-area: habit; 
+    margin: 0px; 
+    font-weight: bold;
+    font-size: 14px;
+    color: #494949;
+`
+const DetailedPokeLv = styled.p`
+    grid-area: lv;
+    margin: 0px;
+    padding-top: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #494949;
+`
+
+const DetailedPokeImg = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: poke-img;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #F4F7FE;
+    align-self: center;
+    justify-self: center;
+    >img{
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+    }
+    :hover{
+        cursor: pointer;
+    }
+`
+
 const PageNavigator = () => {
     const [user] = useUserState();
     const [tasks, loading, error] = useData(user ? user.uid : "dummy");
+    const [detailedTaskView, setDetailedTaskView] = useState({});
 
     const getNumCompletedTasks = () => {
         return tasks ? Object.keys(tasks).filter((taskName) => tasks[taskName].date.includes(todayKey)).length : 0;
@@ -142,6 +190,8 @@ const PageNavigator = () => {
                 
             </TitleLayout> :
 
+        !Object.keys(detailedTaskView).length ?
+
             <MainLayout>
                 <ColorSplash5 id='splash5' />
                 <ColorSplash4 id='splash4' />
@@ -161,6 +211,13 @@ const PageNavigator = () => {
                     <SignOutButton />
                     {/* <AddTaskButton /> */}
                 </Content>
+            </MainLayout>
+
+            :
+
+            <MainLayout>
+
+
             </MainLayout>
     );
 }
