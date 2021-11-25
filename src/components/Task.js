@@ -72,6 +72,58 @@ const PokeImg = styled.div`
     }
 `
 
+const SelectedPokeName = styled.p`
+    grid-area: nm;
+    padding-top: 20px;
+    margin: 0px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #FFFFFF;
+`
+const SelectedHabitName = styled.p`
+    grid-area: habit; 
+    margin: 0px; 
+    font-weight: bold;
+    font-size: 14px;
+    color: #FFFFFF;
+`
+const SelectedPokeLv = styled.p`
+    grid-area: lv;
+    margin: 0px;
+    padding-top: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+`
+
+const SelectedPokeImg = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: poke-img;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #F4F7FE;
+    align-self: center;
+    justify-self: center;
+    position: relative;
+    >img{
+        position: absolute;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        opacity: 0.2;
+    }
+    >svg{
+        z-index: 1;
+    }
+    :hover{
+        cursor: pointer;
+    }
+`
+
 const ExpBar = styled.div`
     grid-area: exper;
     width: flex;
@@ -99,17 +151,6 @@ const DeleteIcon = styled.p`
         cursor: pointer;
     }
 `
-
-// const DeleteIcon = styled.div`
-//     grid-area: delete;
-//     width: flex;
-//     margin-right: 27px;
-//     height: 23px;
-//     background: #F3F6FD;
-//     border-radius: 20px;
-// `
-
-
 
 const Task = ({taskName, taskData}) => {
 
@@ -158,13 +199,16 @@ const Task = ({taskName, taskData}) => {
 
     return(
         completed ? 
-        <TaskCard style={{background: 'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%)'}}>
-            <PokeImg data-cy={taskName} onClick={markAsComplete}>
+        <TaskCard style={{background: 'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%)'}}>        
+            <SelectedPokeImg data-cy={taskName} onClick={markAsComplete}>
+                <svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17.95L3.05 11L0.683334 13.35L10 22.6667L30 2.66667L27.65 0.316666L10 17.95Z" fill="#1389D2"/>
+                </svg>  
                 <img src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
-            </PokeImg>
-            <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
-            <HabitName  data-cy="task-name">{taskName}</HabitName>
-            <PokeLv data-cy='pokemon-level'>Lv. {taskData.level}</PokeLv>
+            </SelectedPokeImg>
+            <SelectedPokeName data-cy="pokemon-name">{pokemonName()}</SelectedPokeName>
+            <SelectedHabitName  data-cy="task-name">{taskName}</SelectedHabitName>
+            <SelectedPokeLv data-cy='pokemon-level'>Lv. {taskData.level}</SelectedPokeLv>
             {/* <button onClick={deleteTask}>delete </button> */}
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
             <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask}> X </DeleteIcon>
@@ -176,7 +220,6 @@ const Task = ({taskName, taskData}) => {
             <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName data-cy="task-name">{taskName}</HabitName>
             <PokeLv data-cy='pokemon-level'>Lv. {taskData.level}</PokeLv>
-            {/* <button onClick={deleteTask}>delete </button> */}
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
             <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask}> X </DeleteIcon>
         </TaskCard>
