@@ -10,7 +10,38 @@ import {
     ColorSplash5,
     ColorBlender
 } from '../styles/ColorSplash';
-import {todayKey} from '../utilities/time';
+import {today, todayKey} from '../utilities/time';
+
+const TitleLayout = styled.div`
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        position: fixed; //To ensure that "ColorSplashes" do not make the screen scroll
+        flex-direction: column;
+        background: #001451;
+        z-index: 0;
+        align-items: center;
+        justify-content: space-around;
+    `
+
+const AppTitle = styled.p`
+        /* Pokéto */
+        width: 213px;
+        height: 90px;
+        left: 108px;
+        top: 283px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 60px;
+        line-height: 90px;
+        /* identical to box height */
+        text-align: center;
+        color: #FFFFFF;
+        text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        margin: 0px;
+        z-index: 1;
+    `
 
 const MainLayout = styled.div`
         height: 100vh;
@@ -97,9 +128,20 @@ const PageNavigator = () => {
 
     return (
         !user ?
-            <MainLayout>
+            <TitleLayout>
+                <AppTitle>Pokéto</AppTitle >
+
+                <ColorSplash5 id='splash5' />
+                <ColorSplash4 id='splash4' />
+                <ColorSplash3 id='splash3' />
+                <ColorSplash2 id='splash2' />
+                <ColorSplash1 id='splash1' />
+                <ColorBlender id='color-blender' />
+
                 <SignInButton />
-            </MainLayout> :
+                
+            </TitleLayout> :
+
             <MainLayout>
                 <ColorSplash5 id='splash5' />
                 <ColorSplash4 id='splash4' />
@@ -110,7 +152,7 @@ const PageNavigator = () => {
                 
 
                 <Header id='header'>
-                    <HeaderDate>Today's Date</HeaderDate>
+                    <HeaderDate>{today.toString()}</HeaderDate>
                     <HabitCount data-cy='habit-count'>{getTasksFraction()}</HabitCount>
                     <HabitsToGo>Habits Completed</HabitsToGo>
                 </Header>
