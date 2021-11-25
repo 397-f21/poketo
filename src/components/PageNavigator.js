@@ -10,7 +10,7 @@ import {
     ColorSplash5,
     ColorBlender
 } from '../styles/ColorSplash';
-import {today, todayKey} from '../utilities/time';
+import {today, todayKey, getDate} from '../utilities/time';
 
 const TitleLayout = styled.div`
         height: 100vh;
@@ -152,7 +152,7 @@ const PageNavigator = () => {
                 
 
                 <Header id='header'>
-                    <HeaderDate>{today.toString()}</HeaderDate>
+                    <HeaderDate>{getDate()}</HeaderDate>
                     <HabitCount data-cy='habit-count'>{getTasksFraction()}</HabitCount>
                     <HabitsToGo>Habits Completed</HabitsToGo>
                 </Header>
