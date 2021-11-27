@@ -17,7 +17,7 @@ const PageNavigator = () => {
         !Object.keys(detailedPokeTask).length ?
             <MainPage tasks = {tasks} setDetailedTaskView = {setDetailedPokeTask}></MainPage>
         : 
-            <DetailedTaskView detailedTaskView = {detailedPokeTask} setDetailedPokeTask = {setDetailedPokeTask}></DetailedTaskView>
+            <DetailedTaskView detailedPokeTask = {detailedPokeTask} setDetailedPokeTask = {setDetailedPokeTask}></DetailedTaskView>
     );
 }
 
