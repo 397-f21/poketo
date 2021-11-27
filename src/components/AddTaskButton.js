@@ -4,7 +4,6 @@ import { writeData, useUserState } from '../utilities/firebase';
 import { pokemonList } from '../utilities/pokemon.js';
 import styled from 'styled-components';
 import '../styles/AddTaskButton.css'
-import { todayKey } from '../utilities/time';
 
 const ModalStyles = {
     overlay: {

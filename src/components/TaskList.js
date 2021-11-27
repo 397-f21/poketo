@@ -1,4 +1,3 @@
-import { useData, useUserState } from '../utilities/firebase.js';
 import Task from './Task'
 import AddTaskButton from './AddTaskButton.js';
 import styled from 'styled-components';
@@ -23,8 +22,6 @@ const PartyPokemon = styled.h1`
 `
 
 const TaskList = ({tasks, setDetailedTaskView}) => {
-    const [user] = useUserState();
-    //const [tasks, loading, error] = useData(user ? user.uid : "dummy");
 
     const generateTaskList = () => {
         return Object.keys(tasks).map((task, index) => {
