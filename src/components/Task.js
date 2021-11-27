@@ -152,16 +152,30 @@ const DeleteIcon = styled.p`
     }
 `
 
-const Task = ({taskName, taskData}) => {
+const Task = ({taskName, taskData, setDetailedTaskView}) => {
 
     const [completed, setCompleted] = useState(taskData.date.includes(todayKey));
     const [user] = useUserState();
 
-    const deleteTask = () => {
+    const seeDetailedView = () => {
+        setDetailedTaskView(
+            {
+                taskName: taskName,
+                date: taskData.date,
+                level: taskData.level,
+                pokemon: taskData.pokemon,
+                pokemonNumber: pokemonNumber()
+            }
+        );
+    }
+
+    const deleteTask = (e) => {
+        e.stopPropagation();
         deleteData(`${user ? user.uid : "dummy"}/${taskName}`);
     }
 
-    const markAsComplete = () => {
+    const markAsComplete = (e) => {
+        e.stopPropagation();
         if (!taskData.date.includes(todayKey)) {
             writeData(taskData.level + 1, `${user ? user.uid : "dummy"}/${taskName}/level`);
             taskData.date.push(todayKey)
@@ -213,7 +227,7 @@ const Task = ({taskName, taskData}) => {
             <ExpBar><ExpText>EXP</ExpText></ExpBar>
             <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask}> X </DeleteIcon>
         </TaskCard> : 
-        <TaskCard>
+        <TaskCard onClick={seeDetailedView}>
             <PokeImg data-cy={taskName} onClick={markAsComplete}>
                 <img src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
             </PokeImg>

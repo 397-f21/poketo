@@ -22,13 +22,13 @@ const PartyPokemon = styled.h1`
     color: #C1C1C1;
 `
 
-const TaskList = ({tasks}) => {
+const TaskList = ({tasks, setDetailedTaskView}) => {
     const [user] = useUserState();
     //const [tasks, loading, error] = useData(user ? user.uid : "dummy");
 
     const generateTaskList = () => {
         return Object.keys(tasks).map((task, index) => {
-            return <Task key={task+index} taskName={task} taskData={tasks[task]}></Task>
+            return <Task key={task+index} taskName={task} taskData={tasks[task]} setDetailedTaskView={setDetailedTaskView}></Task>
         })
     }
 

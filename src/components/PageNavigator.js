@@ -48,6 +48,7 @@ const MainLayout = styled.div`
         height: 100vh;
         width: 100vw;
         display: flex;
+        align-items: center;
         position: fixed; //To ensure that "ColorSplashes" do not make the screen scroll
         flex-direction: column;
         background: #84A7EA;
@@ -110,51 +111,129 @@ const Content = styled.div`
         z-index: 2;
         /* overflow: scroll; */
     `
-
-const DetailedPokeName = styled.p`
-    grid-area: nm;
-    padding-top: 20px;
-    margin: 0px;
-    font-weight: 500;
-    font-size: 14px;
-    color: #494949;
-`
-const DetailedHabitName = styled.p`
-    grid-area: habit; 
-    margin: 0px; 
-    font-weight: bold;
-    font-size: 14px;
-    color: #494949;
-`
-const DetailedPokeLv = styled.p`
-    grid-area: lv;
-    margin: 0px;
-    padding-top: 20px;
-    font-weight: 600;
-    font-size: 14px;
-    text-transform: uppercase;
-    color: #494949;
-`
-
-const DetailedPokeImg = styled.div`
+    
+const DetailedTaskLayout = styled.div`
+    height: 100vh;
+    width: 100vw;
     display: flex;
     align-items: center;
-    justify-content: center;
-    grid-area: poke-img;
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: #F4F7FE;
-    align-self: center;
-    justify-self: center;
+    position: fixed; //To ensure that "ColorSplashes" do not make the screen scroll
+    flex-direction: column;
+    background: #84A7EA;
+    z-index: 0;
+`
+
+const DetailedPokeHeader = styled.div`
+    display: flex;
+    z-index: 1;
+    width: 90%;
+    height: 10%;
+    min-height: 60px;
+    align-items: center;
+    justify-content: space-between;
+    /* padding-left: 30px; */
+`
+
+const DetailedPokeContent = styled.div`
+    display: flex;
+    width: 100%;
+    height: 90%;
+    align-items: center;
+    /* justify-content: space-between; */
+    flex-direction: column;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 27.6%);
+    z-index: 1;
+    overflow-y: scroll;
     >img{
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
+        width: 200px;
+        height: 200px;
     }
-    :hover{
-        cursor: pointer;
+    >h1{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 30px;
+        color: #494949;
+        margin: 0;
     }
+`
+
+const DetailedCompleteToggle = styled.div`
+    display: flex;
+    align-items: center;
+    width: 164px;
+    height: 46px;
+    background: #F4F5FC;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 50px;
+    >h1{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        color: #1389D2;
+        width: 118px;
+        text-align: center;
+    }
+`
+
+const DetailedCompleteToggleBtn = styled.button`
+    display: flex;
+    align-items: center;
+    width: 46px;
+    height: 46px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    border: none;
+`
+
+const DetailedPokeInfo = styled.div`
+    text-align: center;
+    >h2{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        color: #848484;
+        margin: 0;
+    }
+    >h3{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        color: #848484;
+        margin: 0
+    }
+`
+
+const DetailedLevelContainer = styled.div`
+    width: 330px;
+    min-height: 64px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    margin-bottom: 10px;
+
+`
+
+const DetailedStatsContainer = styled.div`
+    width: 330px;
+    min-height: 138px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    margin-bottom: 10px;
+`
+
+const DetailedCalendarContainer = styled.div`
+    width: 330px;
+    min-height: 191px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    margin-bottom: 10px;
 `
 
 const PageNavigator = () => {
@@ -173,6 +252,8 @@ const PageNavigator = () => {
     const getTasksFraction = () => {
         return `${getNumCompletedTasks()}/${getNumTasksTotal()}`;
     }
+
+    console.log(detailedTaskView)
 
     return (
         !user ?
@@ -207,7 +288,7 @@ const PageNavigator = () => {
                     <HabitsToGo>Habits Completed</HabitsToGo>
                 </Header>
                 <Content id='content'>
-                    <TaskList tasks={tasks}/>
+                    <TaskList setDetailedTaskView={setDetailedTaskView} tasks={tasks}/>
                     <SignOutButton />
                     {/* <AddTaskButton /> */}
                 </Content>
@@ -215,10 +296,48 @@ const PageNavigator = () => {
 
             :
 
-            <MainLayout>
+            <DetailedTaskLayout>
+                <ColorSplash5 id='splash5' />
+                <ColorSplash4 id='splash4' />
+                <ColorSplash3 id='splash3' />
+                <ColorSplash2 id='splash2' />
+                <ColorSplash1 id='splash1' />
+                <ColorBlender id='color-blender' />
+
+                <DetailedPokeHeader>
+                    <svg onClick={() => setDetailedTaskView({})} width="15" height="26" viewBox="0 0 15 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.8875 2.8375L12.6625 0.625L0.299988 13L12.675 25.375L14.8875 23.1625L4.72499 13L14.8875 2.8375Z" fill="white"/>
+                    </svg>
+                    <DetailedCompleteToggle>
+                        <h1>Complete?</h1>
+                        <DetailedCompleteToggleBtn>
+                            <svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 17.95L3.05002 11L0.68335 13.35L10 22.6666L30 2.66665L27.65 0.31665L10 17.95Z" fill="#E1E9F0"/>
+                            </svg>
+                        </DetailedCompleteToggleBtn>
+                    </DetailedCompleteToggle>
+                </DetailedPokeHeader>
+                <DetailedPokeContent>
+                    <img src={`https://www.serebii.net/swordshield/pokemon/${detailedTaskView.pokemonNumber}.png`}></img>
+                    <DetailedPokeInfo>
+                        <h2>{detailedTaskView.pokemon}</h2>
+                        <h3>Level {detailedTaskView.level}</h3>
+                    </DetailedPokeInfo>
+                    <h1>{detailedTaskView.taskName}</h1>
+                    <DetailedLevelContainer>
 
 
-            </MainLayout>
+                    </DetailedLevelContainer>
+                    <DetailedStatsContainer>
+
+
+                    </DetailedStatsContainer>
+                    <DetailedCalendarContainer>
+
+
+                    </DetailedCalendarContainer>
+                </DetailedPokeContent>
+            </DetailedTaskLayout>
     );
 }
 

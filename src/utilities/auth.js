@@ -19,6 +19,7 @@ const AuthButton = styled.button`
     /* identical to box height */
     text-align: center;
     color: #FFFFFF;
+    border: none;
 `
 
 export const SignInButton = () => (
