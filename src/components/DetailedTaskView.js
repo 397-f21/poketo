@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import{
     ColorSplash1,
     ColorSplash2,
@@ -18,12 +19,31 @@ import{
     DetailedProgressBarFill,
     DetailedStatsContainer,
     DetailedCalendarContainer
-} from '../styles/PageNavigator.js'
+} from '../styles/PageNavigator.js';
 import{
-    writeData
-} from '../utilities/firebase.js'
+    todayKey
+} from '../utilities/time.js';
+import{
+    writeData,
+    useUserState
+} from '../utilities/firebase.js';
 
 const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
+    const [user] = useUserState();
+    useEffect(() => {
+        writeData(detailedPokeTask.level, `${user ? user.uid : "dummy"}/${detailedPokeTask.taskName}/level`);
+        writeData(detailedPokeTask.date, `${user ? user.uid : "dummy"}/${detailedPokeTask.taskName}/date`)
+    })
+    const removeLastDate = (dateList) => {
+        let dateListCopy = [...dateList]
+        dateListCopy.pop();
+        return dateListCopy;
+    }
+    const addCurrentDate = (dateList) => {
+        let dateListCopy = [...dateList]
+        dateListCopy.push(todayKey);
+        return dateListCopy;
+    }
     return (
         <DetailedTaskLayout>
                 <ColorSplash5 id='splash5' />
@@ -42,7 +62,11 @@ const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
                         ?
                         <DetailedCompleteToggleBtn onClick={
                             () => setDetailedPokeTask(prevObj => {
-                                return {...prevObj, completed: !prevObj.completed}
+                                return {...prevObj, 
+                                        completed: !prevObj.completed,
+                                        level: prevObj.completed ? prevObj.level - 1 : prevObj.level + 1,
+                                        date: !prevObj.completed ? addCurrentDate(prevObj.date) : removeLastDate(prevObj.date)
+                                    }
                             })}
                         >
                             <svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +78,11 @@ const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
                             <h1>Complete?</h1>
                             <DetailedCompleteToggleBtn onClick={
                                 () => setDetailedPokeTask(prevObj => {
-                                    return {...prevObj, completed: !prevObj.completed}
+                                    return {...prevObj, 
+                                            completed: !prevObj.completed,
+                                            level: prevObj.completed ? prevObj.level - 1 : prevObj.level + 1,
+                                            date: !prevObj.completed ? addCurrentDate(prevObj.date) : removeLastDate(prevObj.date)
+                                        }
                                 })}
                             >
                                 <svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
