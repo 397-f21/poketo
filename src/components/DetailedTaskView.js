@@ -1,4 +1,4 @@
-import {
+import{
     ColorSplash1,
     ColorSplash2,
     ColorSplash3,
@@ -19,6 +19,9 @@ import{
     DetailedStatsContainer,
     DetailedCalendarContainer
 } from '../styles/PageNavigator.js'
+import{
+    writeData
+} from '../utilities/firebase.js'
 
 const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
     return (
@@ -34,14 +37,32 @@ const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
                     <svg onClick={() => setDetailedPokeTask({})} width="15" height="26" viewBox="0 0 15 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.8875 2.8375L12.6625 0.625L0.299988 13L12.675 25.375L14.8875 23.1625L4.72499 13L14.8875 2.8375Z" fill="white"/>
                     </svg>
-                    <DetailedCompleteToggle>
-                        <h1>Complete?</h1>
-                        <DetailedCompleteToggleBtn>
+                    {
+                        detailedPokeTask.completed 
+                        ?
+                        <DetailedCompleteToggleBtn onClick={
+                            () => setDetailedPokeTask(prevObj => {
+                                return {...prevObj, completed: !prevObj.completed}
+                            })}
+                        >
                             <svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 17.95L3.05002 11L0.68335 13.35L10 22.6666L30 2.66665L27.65 0.31665L10 17.95Z" fill="#E1E9F0"/>
+                                <path d="M10 17.95L3.05002 11L0.68335 13.35L10 22.6666L30 2.66665L27.65 0.31665L10 17.95Z" fill="#1389D2"/>
                             </svg>
                         </DetailedCompleteToggleBtn>
-                    </DetailedCompleteToggle>
+                        :
+                        <DetailedCompleteToggle>
+                            <h1>Complete?</h1>
+                            <DetailedCompleteToggleBtn onClick={
+                                () => setDetailedPokeTask(prevObj => {
+                                    return {...prevObj, completed: !prevObj.completed}
+                                })}
+                            >
+                                <svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 17.95L3.05002 11L0.68335 13.35L10 22.6666L30 2.66665L27.65 0.31665L10 17.95Z" fill="#E1E9F0"/>
+                                </svg>
+                            </DetailedCompleteToggleBtn>
+                        </DetailedCompleteToggle>
+                    }
                 </DetailedPokeHeader>
                 <DetailedPokeContent>
                     <img src={`https://www.serebii.net/swordshield/pokemon/${detailedPokeTask.pokemonNumber}.png`}></img>

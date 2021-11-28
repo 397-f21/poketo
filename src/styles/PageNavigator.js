@@ -167,6 +167,7 @@ export const DetailedCompleteToggle = styled.div`
 export const DetailedCompleteToggleBtn = styled.button`
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 46px;
     height: 46px;
     background: #FFFFFF;
