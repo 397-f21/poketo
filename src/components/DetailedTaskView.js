@@ -44,6 +44,7 @@ const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
         dateListCopy.push(todayKey);
         return dateListCopy;
     }
+    // console.log(`${(detailedPokeTask.level/90)*100}%`)
     return (
         <DetailedTaskLayout>
                 <ColorSplash5 id='splash5' />
@@ -103,7 +104,7 @@ const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
                     
                     <DetailedLevelContainer>
                         <DetailedProgressBar>
-                            <DetailedProgressBarFill/>
+                            <DetailedProgressBarFill progress={(detailedPokeTask.level/90)*100 > 100? 100 : (detailedPokeTask.level/90)*100}/>
                         </DetailedProgressBar>
                         <div><h4 style={{color: '#1389D2'}}>{detailedPokeTask.level}</h4><h4> / 90 days until forming lifestyle</h4></div>
                     </DetailedLevelContainer>

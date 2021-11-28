@@ -221,16 +221,17 @@ export const DetailedLevelContainer = styled.div`
 export const DetailedProgressBar = styled.div`
     display: flex;
     align-items: center;
-    padding: 0 5px 0 5px;
+    /* padding: 0 5px 0 5px; */
     width: 306px;
     height: 23.54px;
     background: #F3F6FD;
     border-radius: 20px;
+    overflow-y: hidden;
 `
 
 export const DetailedProgressBarFill = styled.div`
-    width: 4%;
-    height: 14.98px;
+    width: ${props => props.progress}%;
+    height: 100%;
     border-radius: 20px;
     background: linear-gradient(90deg, #7FFABF 0%, #2AC4E6 100%);
 `

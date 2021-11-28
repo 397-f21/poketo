@@ -126,8 +126,10 @@ const SelectedPokeImg = styled.div`
 
 const ExpBar = styled.div`
     grid-area: exper;
-    width: flex;
-    margin-right: 27px;
+    display: flex;
+    align-items: center;
+    width: 95%;
+    /* margin-right: 27px; */
     height: 23px;
     background: #F3F6FD;
     border-radius: 20px;
@@ -137,8 +139,25 @@ const ExpText = styled.p`
     font-weight: 600;
     font-size: 12px;
     color: #494949;
-    padding: 3px 8px;
+    padding-left: 8px;
     margin: 0px;
+`
+const ExpFillContainer = styled.div`
+    display: flex;
+    align-items: center;
+    height: 15px;
+    flex-grow: 1;
+    background: #E1E6F1;
+    border-radius: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    overflow-y: hidden;
+`
+const ExpFill = styled.div`
+    height: 100%;
+    width: ${props => props.progress}%;
+    background: linear-gradient(90deg, #7FFABF 0%, #2AC4E6 100%);
+    border-radius: 20px;
 `
 
 const DeleteIcon = styled.p`
@@ -150,6 +169,7 @@ const DeleteIcon = styled.p`
     :hover{
         cursor: pointer;
     }
+    color: ${props => props.completed ? '#FFFFFF' : '#494949'};
 `
 
 const Task = ({taskName, taskData, setDetailedTaskView}) => {
@@ -256,8 +276,13 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
             <SelectedHabitName  data-cy="task-name">{taskName}</SelectedHabitName>
             <SelectedPokeLv data-cy='pokemon-level'>Lv. {taskData.level}</SelectedPokeLv>
             {/* <button onClick={deleteTask}>delete </button> */}
-            <ExpBar><ExpText>EXP</ExpText></ExpBar>
-            <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask}> X </DeleteIcon>
+            <ExpBar>
+                <ExpText>EXP</ExpText>
+                <ExpFillContainer>
+                    <ExpFill progress={(taskData.level/90)*100 > 100? 100 : (taskData.level/90)*100}/>
+                </ExpFillContainer>
+            </ExpBar>
+            <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask} completed={completed}> X </DeleteIcon>
         </TaskCard> : 
         <TaskCard onClick={seeDetailedView}>
             <PokeImg data-cy={taskName} onClick={markAsComplete}>
@@ -266,8 +291,13 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
             <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName data-cy="task-name">{taskName}</HabitName>
             <PokeLv data-cy='pokemon-level'>Lv. {taskData.level}</PokeLv>
-            <ExpBar><ExpText>EXP</ExpText></ExpBar>
-            <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask}> X </DeleteIcon>
+            <ExpBar>
+                <ExpText>EXP</ExpText>
+                <ExpFillContainer>
+                    <ExpFill progress={(taskData.level/90)*100 > 100? 100 : (taskData.level/90)*100}/>
+                </ExpFillContainer>
+            </ExpBar>
+            <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask} completed={completed}> X </DeleteIcon>
         </TaskCard>
     )
 }
