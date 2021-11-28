@@ -219,7 +219,7 @@ const AddTaskButton = () => {
         const dbEntry = {
             'pokemon': selectedPokeObj.name,
             'date': [''],
-            'level': 1
+            'level': 0
         }
         writeData(dbEntry, `${user ? user.uid : "dummy"}/${taskText}`);
         closeModal();
