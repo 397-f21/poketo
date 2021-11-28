@@ -44,7 +44,6 @@ const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
         dateListCopy.push(todayKey);
         return dateListCopy;
     }
-    // console.log(`${(detailedPokeTask.level/90)*100}%`)
     return (
         <DetailedTaskLayout>
                 <ColorSplash5 id='splash5' />
@@ -114,6 +113,7 @@ const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
                     
                     <DetailedCalendarContainer>
                     </DetailedCalendarContainer>
+                    
                 </DetailedPokeContent>
             </DetailedTaskLayout>
     );

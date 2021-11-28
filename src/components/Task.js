@@ -226,15 +226,15 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
         e.stopPropagation();
         if (!taskData.date.includes(todayKey)) {
             taskData.date.push(todayKey);
-            const streak = calculateStreak();
-            writeData(streak, `${user ? user.uid : "dummy"}/${taskName}/level`);
+            const level = taskData.date.length - 1;
+            writeData(level, `${user ? user.uid : "dummy"}/${taskName}/level`);
             writeData(taskData.date, `${user ? user.uid : "dummy"}/${taskName}/date`);
             setCompleted(true);
         }
         else {
             taskData.date.pop();
-            const streak = calculateStreak();
-            writeData(streak, `${user ? user.uid : "dummy"}/${taskName}/level`);
+            const level = taskData.date.length - 1;
+            writeData(level, `${user ? user.uid : "dummy"}/${taskName}/level`);
             writeData(taskData.date, `${user ? user.uid : "dummy"}/${taskName}/date`);
             setCompleted(false);
         }
