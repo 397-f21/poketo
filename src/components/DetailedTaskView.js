@@ -14,6 +14,8 @@ import{
     DetailedPokeContent,
     DetailedPokeInfo,
     DetailedLevelContainer,
+    DetailedProgressBar,
+    DetailedProgressBarFill,
     DetailedStatsContainer,
     DetailedCalendarContainer
 } from '../styles/PageNavigator.js'
@@ -51,8 +53,16 @@ const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
                     <h1 data-cy='display-task-nm'>{detailedPokeTask.taskName}</h1>
                     
                     <DetailedLevelContainer>
-                        </DetailedLevelContainer><DetailedStatsContainer>
-                        </DetailedStatsContainer><DetailedCalendarContainer>
+                        <DetailedProgressBar>
+                            <DetailedProgressBarFill/>
+                        </DetailedProgressBar>
+                        <div><h4 style={{color: '#1389D2'}}>{detailedPokeTask.level}</h4><h4> / 90 days until forming lifestyle</h4></div>
+                    </DetailedLevelContainer>
+
+                    <DetailedStatsContainer>
+                    </DetailedStatsContainer>
+                    
+                    <DetailedCalendarContainer>
                     </DetailedCalendarContainer>
                 </DetailedPokeContent>
             </DetailedTaskLayout>

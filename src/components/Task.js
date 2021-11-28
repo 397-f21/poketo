@@ -164,7 +164,8 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
                 date: taskData.date,
                 level: taskData.level,
                 pokemon: taskData.pokemon,
-                pokemonNumber: pokemonNumber()
+                pokemonNumber: pokemonNumber(),
+                completed: completed
             }
         );
     }
@@ -174,17 +175,46 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
         deleteData(`${user ? user.uid : "dummy"}/${taskName}`);
     }
 
+    const calculateStreak = () => {
+        let thisDate = new Date();
+        let streak = 0;
+        const filteredDates = taskData.date.filter(date => date !== '');
+        const filteredDatesReversed = filteredDates.slice(0).reverse();
+        const dateObjList = filteredDatesReversed.map(
+            dateStr => {
+                const dateStrSplit = dateStr.split('/')
+                return new Date(parseInt(dateStrSplit[3])+1900, parseInt(dateStrSplit[1]), parseInt(dateStrSplit[2]))
+            }
+        );
+        for (const date of dateObjList){
+            if (Math.floor((thisDate.getTime() - date.getTime())/86400000) === 0){
+                streak ++;
+            }
+            else if(Math.floor((thisDate.getTime() - date.getTime())/86400000) === 1){
+                streak ++;
+                thisDate = date;
+            }
+            else{
+                streak = 0;
+                return streak;
+            }
+        }
+        return streak;
+    }
+
     const markAsComplete = (e) => {
         e.stopPropagation();
         if (!taskData.date.includes(todayKey)) {
-            writeData(taskData.level + 1, `${user ? user.uid : "dummy"}/${taskName}/level`);
-            taskData.date.push(todayKey)
+            taskData.date.push(todayKey);
+            const streak = calculateStreak();
+            writeData(streak, `${user ? user.uid : "dummy"}/${taskName}/level`);
             writeData(taskData.date, `${user ? user.uid : "dummy"}/${taskName}/date`);
             setCompleted(true);
         }
         else {
-            writeData(taskData.level - 1, `${user ? user.uid : "dummy"}/${taskName}/level`);
             taskData.date.pop();
+            const streak = calculateStreak();
+            writeData(streak, `${user ? user.uid : "dummy"}/${taskName}/level`);
             writeData(taskData.date, `${user ? user.uid : "dummy"}/${taskName}/date`);
             setCompleted(false);
         }
@@ -211,9 +241,11 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
         return pokemonObj.evolutions[evoIndex()];
     }
 
+    console.log(calculateStreak())
+
     return(
         completed ? 
-        <TaskCard style={{background: 'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%)'}}>        
+        <TaskCard onClick={seeDetailedView} style={{background: 'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%)'}}>        
             <SelectedPokeImg data-cy={taskName} onClick={markAsComplete}>
                 <svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 17.95L3.05 11L0.683334 13.35L10 22.6667L30 2.66667L27.65 0.316666L10 17.95Z" fill="#1389D2"/>

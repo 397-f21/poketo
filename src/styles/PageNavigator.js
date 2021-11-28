@@ -196,13 +196,42 @@ export const DetailedPokeInfo = styled.div`
 `
 
 export const DetailedLevelContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 330px;
     min-height: 64px;
     background: #FFFFFF;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
     border-radius: 20px;
     margin-bottom: 10px;
+    h4{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        margin: 0;
+        display: inline;
+        /* margin-top: 5px; */
+    }
+`
 
+export const DetailedProgressBar = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 0 5px 0 5px;
+    width: 306px;
+    height: 23.54px;
+    background: #F3F6FD;
+    border-radius: 20px;
+`
+
+export const DetailedProgressBarFill = styled.div`
+    width: 4%;
+    height: 14.98px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #7FFABF 0%, #2AC4E6 100%);
 `
 
 export const DetailedStatsContainer = styled.div`
