@@ -265,7 +265,7 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
 
     return(
         completed ? 
-        <TaskCard onClick={seeDetailedView} style={{background: 'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%)'}}>        
+        <TaskCard onClick={seeDetailedView} style={{background: 'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%)'}} data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-card`}>        
             <SelectedPokeImg data-cy={taskName} onClick={markAsComplete}>
                 <svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 17.95L3.05 11L0.683334 13.35L10 22.6667L30 2.66667L27.65 0.316666L10 17.95Z" fill="#1389D2"/>
@@ -284,7 +284,7 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
             </ExpBar>
             <DeleteIcon data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-del-button`} onClick={deleteTask} completed={completed}> X </DeleteIcon>
         </TaskCard> : 
-        <TaskCard onClick={seeDetailedView}>
+        <TaskCard onClick={seeDetailedView} data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-card`}>
             <PokeImg data-cy={taskName} onClick={markAsComplete}>
                 <img src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
             </PokeImg>

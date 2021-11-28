@@ -22,13 +22,14 @@ describe('Detailed Task View displays correct information', () => {
         cy.get('[data-cy=submit-btn]').click();
         cy.get('[data-cy=task-name]').should('contain', testTask);
         cy.get('[data-cy=pokemon-name]').should('contain', testPokemon);
-        cy.get('[data-cy=pokemon-level]').should('contain', 'Lv. 1');
+        cy.get('[data-cy=pokemon-level]').should('contain', 'Lv. 0');
 
-        cy.get(`[data-cy=${testTask}-task-card]`).click();
-        cy.get('[data-cy=display-info]').should('contain')
+        const taskCyName = testTask.replace(' ', '-');
+
+        cy.get(`[data-cy=${testPokemon}-${taskCyName}-card]`).click();
         cy.get('[data-cy=display-task-nm]').should('contain', testTask);
         cy.get('[data-cy=display-pokemon-nm]').should('contain', testPokemon);
-        cy.get('[data-cy=display-pokemon-lv]').should('contain', 'Level 1');
+        cy.get('[data-cy=display-pokemon-lv]').should('contain', 'Level 0');
         cy.logout();
     })
 
