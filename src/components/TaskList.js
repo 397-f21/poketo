@@ -25,7 +25,7 @@ const TaskList = ({tasks, setDetailedTaskView}) => {
 
     const generateTaskList = () => {
         return Object.keys(tasks).map((task, index) => {
-            return <Task key={task+index} taskName={task} taskData={tasks[task]} setDetailedTaskView={setDetailedTaskView}></Task>
+            return <Task key={task+index} taskName={task} taskData={tasks[task]} setDetailedTaskView={setDetailedTaskView} data-cy='task-card'></Task>
         })
     }
 

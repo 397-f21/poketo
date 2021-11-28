@@ -44,11 +44,11 @@ const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
                 <DetailedPokeContent>
                     <img src={`https://www.serebii.net/swordshield/pokemon/${detailedPokeTask.pokemonNumber}.png`}></img>
                     <DetailedPokeInfo>
-                        <h2>{detailedPokeTask.pokemon}</h2>
-                        <h3>Level {detailedPokeTask.level}</h3>
+                        <h2 data-cy='display-pokemon-nm'>{detailedPokeTask.pokemon}</h2>
+                        <h3 data-cy='display-pokemon-lv'>Level {detailedPokeTask.level}</h3>
                     </DetailedPokeInfo>
                     
-                    <h1>{detailedPokeTask.taskName}</h1>
+                    <h1 data-cy='display-task-nm'>{detailedPokeTask.taskName}</h1>
                     
                     <DetailedLevelContainer>
                         </DetailedLevelContainer><DetailedStatsContainer>
