@@ -241,7 +241,7 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
                 <svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 17.95L3.05 11L0.683334 13.35L10 22.6667L30 2.66667L27.65 0.316666L10 17.95Z" fill="#1389D2"/>
                 </svg>  
-                <img src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
+                <img alt='pokeimg' src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
             </SelectedPokeImg>
             <SelectedPokeName data-cy="pokemon-name">{pokemonName()}</SelectedPokeName>
             <SelectedHabitName  data-cy="task-name">{taskName}</SelectedHabitName>
@@ -257,7 +257,7 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
         </TaskCard> : 
         <TaskCard onClick={seeDetailedView} data-cy={`${pokemonName()}-${taskName.replace(' ', '-')}-card`}>
             <PokeImg data-cy={taskName} onClick={markAsComplete}>
-                <img src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
+                <img alt='pokeimg' src={`https://www.serebii.net/swordshield/pokemon/${pokemonNumber()}.png`}></img>
             </PokeImg>
             <PokeName data-cy="pokemon-name">{pokemonName()}</PokeName>
             <HabitName data-cy="task-name">{taskName}</HabitName>

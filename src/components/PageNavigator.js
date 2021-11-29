@@ -9,7 +9,9 @@ const PageNavigator = () => {
     const [tasks, loading, error] = useData(user ? user.uid : "dummy");
     const [detailedPokeTask, setDetailedPokeTask] = useState({});
 
-    console.log(detailedPokeTask)
+    console.log(detailedPokeTask);
+    console.log(loading);
+    console.log(error);
 
     return (
         !user ?
