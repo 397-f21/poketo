@@ -4,7 +4,7 @@ export const todayKey = `${today.getDay()}/${today.getMonth()}/${today.getDate()
 
 export const DAY_MAP = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-export const MONTH_MAP = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'Septempber', 'October', 'November', 'December'];
+export const MONTH_MAP = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export const getDate = () => {
     const month = MONTH_MAP[today.getMonth()];

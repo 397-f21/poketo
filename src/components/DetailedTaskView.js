@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import{
     ColorSplash1,
     ColorSplash2,
@@ -20,18 +20,34 @@ import{
     DetailedStatsContainer,
     DetailedStats,
     DetailedStatBox,
-    DetailedCalendarContainer
+    DetailedCalendarContainer,
+    DetailedCalendar,
+    DetailedCalendarEntry,
+    DetailedCalendarControl
 } from '../styles/PageNavigator.js';
 import{
-    todayKey
+    todayKey,
+    MONTH_MAP
 } from '../utilities/time.js';
 import{
     writeData,
     useUserState
 } from '../utilities/firebase.js';
 
+const generateCalendarRange = () =>{
+    const today = new Date();
+    const weekStart = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
+    let calendarRange = [weekStart];
+    for (let i = 1; i < 7; i++){
+        const nextDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + i);
+        calendarRange.push(nextDate)
+    }
+    return calendarRange;
+}
+
 const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
     const [user] = useUserState();
+    const [calendarRange, setCalendarRange] = useState(generateCalendarRange())
     useEffect(() => {
         writeData(detailedPokeTask.level, `${user ? user.uid : "dummy"}/${detailedPokeTask.taskName}/level`);
         writeData(detailedPokeTask.date, `${user ? user.uid : "dummy"}/${detailedPokeTask.taskName}/date`)
@@ -72,7 +88,20 @@ const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
         }
         return streak;
     }
-    // console.log(calculateStreak())
+
+    const generateCompletedDates = () =>{
+        const filteredDates = detailedPokeTask.date.filter(date => date !== '');
+        const dateObjList = filteredDates.map(
+            dateStr => {
+                const dateStrSplit = dateStr.split('/')
+                return new Date(parseInt(dateStrSplit[3])+1900, parseInt(dateStrSplit[1]), parseInt(dateStrSplit[2])).getTime();
+            }
+        );
+        return dateObjList;
+    }
+
+    const completedDates = generateCompletedDates();
+
     return (
         <DetailedTaskLayout>
                 <ColorSplash5 id='splash5' />
@@ -156,6 +185,19 @@ const DetailedTaskView = ({detailedPokeTask, setDetailedPokeTask}) => {
                     </DetailedStatsContainer>
                     
                     <DetailedCalendarContainer>
+                        <h1>Weekly View</h1>
+                        <DetailedCalendarControl>
+                            <h2 style={{color: '#1389D2'}} onClick={() => setCalendarRange(prevRange => prevRange.map(date => new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7)))}>&#60;</h2>
+                            <h2>{MONTH_MAP[calendarRange[0].getMonth()]} {calendarRange[0].getDate()} - {MONTH_MAP[calendarRange[6].getMonth()]} {calendarRange[6].getDate()}</h2>
+                            <h2 style={{color: '#1389D2'}} onClick={() => setCalendarRange(prevRange => prevRange.map(date => new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7)))}>&#62;</h2>
+                        </DetailedCalendarControl>
+                        <DetailedCalendar>
+                            {calendarRange.map((date) => 
+                                completedDates.includes(date.getTime()) ? 
+                                <DetailedCalendarEntry key={date} backgroundColor={'linear-gradient(180deg, #2AC4E6 0%, #728EE4 100%);'} textColor={'#FFFFFF'}>{date.getDate()}</DetailedCalendarEntry> :
+                                <DetailedCalendarEntry key={date} backgroundColor={'#F4F7FE'} textColor={'#C4C4C4'}>{date.getDate()}</DetailedCalendarEntry>
+                            )}
+                        </DetailedCalendar>
                     </DetailedCalendarContainer>
 
                 </DetailedPokeContent>

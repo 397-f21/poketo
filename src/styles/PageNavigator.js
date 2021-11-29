@@ -297,10 +297,58 @@ export const DetailedStatBox = styled.div`
 `
 
 export const DetailedCalendarContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 330px;
     min-height: 191px;
     background: #FFFFFF;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
     border-radius: 20px;
     margin-bottom: 10px;
+    >h1{
+        margin: 0 0 20px 0;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        color: #494949;
+    }
+`
+export const DetailedCalendar = styled.div`
+    display: flex;
+    width: 85%;
+    justify-content: space-around;
+`
+
+export const DetailedCalendarControl = styled.div`
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: space-between;
+    >h2{
+        :hover{
+            cursor: pointer;
+        }
+        margin: 0 0 10px 0;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        color: #494949;
+    }
+`
+
+export const DetailedCalendarEntry = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35.44px;
+    height: 35.44px;
+    border-radius: 50%;
+    background: ${props => props.backgroundColor};
+    font-family: Poppins;
+    font-size: 14px;
+    color:  ${props => props.textColor};
 `
