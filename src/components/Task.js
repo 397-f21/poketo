@@ -195,33 +195,6 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
         deleteData(`${user ? user.uid : "dummy"}/${taskName}`);
     }
 
-    const calculateStreak = () => {
-        let thisDate = new Date();
-        let streak = 0;
-        const filteredDates = taskData.date.filter(date => date !== '');
-        const filteredDatesReversed = filteredDates.slice(0).reverse();
-        const dateObjList = filteredDatesReversed.map(
-            dateStr => {
-                const dateStrSplit = dateStr.split('/')
-                return new Date(parseInt(dateStrSplit[3])+1900, parseInt(dateStrSplit[1]), parseInt(dateStrSplit[2]))
-            }
-        );
-        for (const date of dateObjList){
-            if (Math.floor((thisDate.getTime() - date.getTime())/86400000) === 0){
-                streak ++;
-            }
-            else if(Math.floor((thisDate.getTime() - date.getTime())/86400000) === 1){
-                streak ++;
-                thisDate = date;
-            }
-            else{
-                streak = 0;
-                return streak;
-            }
-        }
-        return streak;
-    }
-
     const markAsComplete = (e) => {
         e.stopPropagation();
         if (!taskData.date.includes(todayKey)) {
@@ -260,8 +233,6 @@ const Task = ({taskName, taskData, setDetailedTaskView}) => {
         }
         return pokemonObj.evolutions[evoIndex()];
     }
-
-    console.log(calculateStreak())
 
     return(
         completed ? 

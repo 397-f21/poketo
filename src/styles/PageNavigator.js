@@ -118,6 +118,11 @@ export const DetailedPokeHeader = styled.div`
     min-height: 60px;
     align-items: center;
     justify-content: space-between;
+    >svg{
+        :hover{
+            cursor: pointer;
+        }
+    }
     /* padding-left: 30px; */
 `
 
@@ -174,6 +179,9 @@ export const DetailedCompleteToggleBtn = styled.button`
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
     border-radius: 50%;
     border: none;
+    :hover{
+        cursor: pointer;
+    }
 `
 
 export const DetailedPokeInfo = styled.div`
@@ -237,12 +245,55 @@ export const DetailedProgressBarFill = styled.div`
 `
 
 export const DetailedStatsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 330px;
     min-height: 138px;
     background: #FFFFFF;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
     border-radius: 20px;
     margin-bottom: 10px;
+    >h1{
+        margin:0;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        color: #494949;
+    }
+`
+
+export const DetailedStats = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45%;
+    width: 95%;
+`
+
+export const DetailedStatBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: calc(100%/3);
+    height: 100%;
+    >h1{
+        margin:0;
+        font-family: Source Sans Pro;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        color: #494949;
+    }
+    >p{
+        margin: 0;
+        font-family: Source Sans Pro;
+        font-size: 10px;
+        color: #5e5e5e;
+    }
 `
 
 export const DetailedCalendarContainer = styled.div`
