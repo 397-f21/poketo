@@ -91,18 +91,18 @@ const ModalTaskInput = styled.input`
 `
 
 const PokemonGrid = styled.div`
-    /* overflow-y: scroll; */
-
     display: grid;
     width: 90%;
-    height: 30%;
+    height: 40%;
+    overflow-y: scroll;
     justify-content: center;
-    align-content: center;
+    align-content: flex-start;
     grid-template-columns: repeat(3, 90px);
-    grid-template-rows: repeat(auto-fit, 90px);
+    grid-auto-rows: 90px;
     column-gap: 23px;
     row-gap: 23px;
-    padding-bottom: 30px;
+    /* grid-template-rows: repeat(auto-fit, 90px); */
+    /* padding-bottom: 30px; */
     /* height: 500px; */
     >img{
         /* width: 90%;
@@ -125,6 +125,7 @@ const PokemonGrid = styled.div`
 `
 
 const SubmitBtnWrapper = styled.div`
+    margin-top: 10px;
     width: 90%;
     max-width: 500px;
     display: flex;
