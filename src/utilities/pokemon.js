@@ -63,7 +63,7 @@ export const pokemonList =[
         ]
     },
     {
-        name: "Nidoran",
+        name: "Nidoran \u2640",
         numbers: ["029", "030", "031"],
         evolutions: [
             "Nidoran",
@@ -72,7 +72,7 @@ export const pokemonList =[
         ]
     },
     {
-        name: "Nidoran",
+        name: "Nidoran \u2642",
         numbers: ["032", "033", "034"],
         evolutions: [
             "Nidoran",
